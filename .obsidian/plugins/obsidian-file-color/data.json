@@ -1,0 +1,88 @@
+{
+  "cascadeColors": false,
+  "colorBackground": false,
+  "palette": [
+    {
+      "id": "Odi9o6yoaQnyZ4zB4ox9z",
+      "name": "README",
+      "value": "#3e3be8"
+    },
+    {
+      "id": "kAVoQEy0DNKAKMxPklmKl",
+      "name": "",
+      "value": "#dd2727"
+    },
+    {
+      "id": "lem--aGjpVGqFkgjEJh7X",
+      "name": "",
+      "value": "#3be84f"
+    },
+    {
+      "id": "6Wq3Q5aWNs8JMEGECVkdR",
+      "name": "",
+      "value": "#cba51a"
+    },
+    {
+      "id": "uSy0i8QDTHfAiWatZzAmg",
+      "name": "",
+      "value": "#16d1df"
+    },
+    {
+      "id": "QwA8i1VCfl9zF_tURDhOt",
+      "name": "",
+      "value": "#58c80e"
+    },
+    {
+      "id": "01fKioCQBDpwKbu0Qw88C",
+      "name": "",
+      "value": "#d25019"
+    },
+    {
+      "id": "2lsPi5NnNWQ0QqxAFfXKa",
+      "name": "",
+      "value": "#bbff00"
+    }
+  ],
+  "fileColors": [
+    {
+      "path": "README.md",
+      "color": "Odi9o6yoaQnyZ4zB4ox9z"
+    },
+    {
+      "path": "Win Commands & Help",
+      "color": "kAVoQEy0DNKAKMxPklmKl"
+    },
+    {
+      "path": "Kiwi SDR Radio",
+      "color": "lem--aGjpVGqFkgjEJh7X"
+    },
+    {
+      "path": "Informatica Industrială",
+      "color": "lem--aGjpVGqFkgjEJh7X"
+    },
+    {
+      "path": "Transmisia Datelor",
+      "color": "kAVoQEy0DNKAKMxPklmKl"
+    },
+    {
+      "path": "Echipamente de automatizare hidro-pneumatice",
+      "color": "6Wq3Q5aWNs8JMEGECVkdR"
+    },
+    {
+      "path": "Ingineria reglarii automate II",
+      "color": "2lsPi5NnNWQ0QqxAFfXKa"
+    },
+    {
+      "path": "Csepregi Artur",
+      "color": "01fKioCQBDpwKbu0Qw88C"
+    },
+    {
+      "path": "Sisteme de Timp Real",
+      "color": "uSy0i8QDTHfAiWatZzAmg"
+    },
+    {
+      "path": "Echipamente de automatizare electrice si electronice",
+      "color": "QwA8i1VCfl9zF_tURDhOt"
+    }
+  ]
+}
