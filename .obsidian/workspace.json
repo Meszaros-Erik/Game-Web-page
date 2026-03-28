@@ -11,10 +11,14 @@
             "id": "f9be1bab4c295b38",
             "type": "leaf",
             "state": {
-              "type": "empty",
-              "state": {},
+              "type": "markdown",
+              "state": {
+                "file": "README.md",
+                "mode": "source",
+                "source": true
+              },
               "icon": "lucide-file",
-              "title": "New tab"
+              "title": "README"
             }
           }
         ]
@@ -220,59 +224,31 @@
       "command-palette:Open command palette": false,
       "bases:Create new base": false,
       "daily-notes:Open today's daily note": false,
-      "obsidian-git:Open Git source control": false
+      "obsidian-git:Open Git source control": false,
+      "omnisearch:Omnisearch": false
     }
-  },
-  "floating": {
-    "id": "6182337d811e77f0",
-    "type": "floating",
-    "children": [
-      {
-        "id": "1e95115e0a6b3223",
-        "type": "window",
-        "children": [
-          {
-            "id": "4c6ac2132c4a4de9",
-            "type": "tabs",
-            "children": [
-              {
-                "id": "738b169e6e6625d0",
-                "type": "leaf",
-                "state": {
-                  "type": "empty",
-                  "state": {},
-                  "icon": "lucide-file",
-                  "title": "New tab"
-                }
-              }
-            ]
-          }
-        ],
-        "direction": "vertical",
-        "x": 1151,
-        "y": 0,
-        "width": 769,
-        "height": 1040,
-        "maximize": false,
-        "zoom": 0
-      }
-    ]
   },
   "active": "f9be1bab4c295b38",
   "lastOpenFiles": [
-    "Transmisia Datelor/Lucrari Lab/Îndrumator Lab.pdf",
-    "Transmisia Datelor/Lucrari Lab/Lab 4/style.css",
-    "Transmisia Datelor/Lucrari Lab/Lab 4/index.html",
+    "Snake Game/style.css",
+    "Snake Game/index.html",
+    "Snake Game/logo.png",
+    "Snake Game/index.js",
+    "Snake Game",
+    "Roll Dice App/style.css",
+    "Roll Dice App/index.js",
+    "Roll Dice App/logo.jpg",
+    "Roll Dice App/index.html",
+    "Roll Dice App",
+    "Mine Sweeper/style.css",
+    "Mine Sweeper/script.js",
+    "Mine Sweeper/logo.jpg",
+    "Mine Sweeper/index.html",
+    "Lottery Spin Wheel/spinner-arrow.svg",
+    "Lottery Spin Wheel/spin logo.png",
+    "2048 Game/logo.jpg",
     "Transmisia Datelor/Readme-T.D.md",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/readable-stream/doc/wg-meetings/2015-01-30.md",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/readable-stream/doc/wg-meetings",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/readable-stream/doc",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/source-map/lib/util.js",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/source-map/lib/source-map-generator.js",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/source-map/lib/source-node.js",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/source-map/lib/source-map-consumer.js",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/source-map/lib/quick-sort.js",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/source-map/lib/binary-search.js",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/live-server/test/data/test.svg",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/faye-websocket/README.md",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/faye-websocket/LICENSE.md",
@@ -284,12 +260,6 @@
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/serve-index/public/icons/page_world.png",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/serve-index/public/icons/page_word.png",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/serve-index/public/icons/page_white_zip.png",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/serve-index/public/icons/page_white_wrench.png",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/serve-index/public/icons/page_white_world.png",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/serve-index/public/icons/page_white_word.png",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/serve-index/public/icons/page_white_width.png",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/serve-index/public/icons/page_white_visualstudio.png",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/serve-index/public/icons/page_white_vector.png",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/upath/readme.md",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/for-in/README.md",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/has-value/README.md",
