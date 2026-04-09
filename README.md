@@ -1,6 +1,5 @@
 ## G-Web
 **G-Web** is a curated collection of lightweight, interactive web-based games and mini-apps. This repository serves as a digital playground featuring classic logic puzzles, arcade staples, and fun utility tools built entirely with modern web technologies.
-
 ## What's Inside?
 - **2048 Game :** The addictive tile-merging challenge.
 - **Snake Game :** A tribute to the legendary Nokia-era classic.
