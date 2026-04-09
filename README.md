@@ -19,10 +19,10 @@ The logic layer of the website is built with clean, maintainable, and modern Jav
 - **Event-Driven Programming :** Uses `DOMContentLoaded` listeners and `keyup` events for real-time form validation and UI responsiveness.
 - **Coding Style :**
     - **Modular Logic :** Functions are separated by responsibility *(e.g., `checkEmail`, `sendEmail`, `activeMenu`)*.
-    - **User Experience (UX) :** Implements **Debouncing** on scroll events to optimize performance and prevent browser lag.
+    - **User Experience *(UX)* :** Implements **Debouncing** on scroll events to optimize performance and prevent browser lag.
     - **Regex Validation :** Uses robust Regular Expressions for client-side email verification.
 - **External Libraries :**
-    - **[SweetAlert2](https://cdn.jsdelivr.net/npm/sweetalert2@11) :** For beautiful, responsive, and customizable popup notifications upon form submission.
+    - **[SweetAlert2](https://sweetalert2.github.io/) :** For beautiful, responsive, and customizable popup notifications upon form submission.
     - **[SMTPJS](https://smtpjs.com/v3/smtp.js) :** Integrated to handle email communications directly from the frontend via **ElasticEmail**.
 ## How to Play
 Whether you're looking for a quick distraction or exploring simple game logic, these gems are polished and ready to play directly in your browser. No downloads or installations required-just click and play!
