@@ -15,7 +15,7 @@
               "state": {
                 "file": "README.md",
                 "mode": "source",
-                "source": false
+                "source": true
               },
               "icon": "lucide-file",
               "title": "README"
@@ -230,26 +230,30 @@
   },
   "active": "3b7588c59cc2ce5e",
   "lastOpenFiles": [
-    "README.md",
     "Snake Game/style.css",
-    "Snake Game/index.html",
     "Snake Game/logo.png",
     "Snake Game/index.js",
+    "Snake Game/index.html",
     "Snake Game",
     "Roll Dice App/style.css",
-    "Roll Dice App/index.js",
     "Roll Dice App/logo.jpg",
+    "Roll Dice App/index.js",
     "Roll Dice App/index.html",
     "Roll Dice App",
-    "Mine Sweeper/style.css",
     "Mine Sweeper/script.js",
+    "Mine Sweeper/style.css",
     "Mine Sweeper/logo.jpg",
+    "Mine Sweeper/index.html",
     "Lottery Spin Wheel/spinner-arrow.svg",
     "Lottery Spin Wheel/spin logo.png",
-    "2048 Game/logo.jpg",
+    "image/Spin.png",
+    "image/Snake Game.png",
+    "image/Mine Sweeper.png",
+    "image/E-sport.jpg",
+    "image/Controller.PNG",
+    "README.md",
     "Transmisia Datelor/Readme-T.D.md",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/readable-stream/doc/wg-meetings/2015-01-30.md",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/live-server/test/data/test.svg",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/faye-websocket/README.md",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/faye-websocket/LICENSE.md",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/faye-websocket/CHANGELOG.md",
@@ -257,9 +261,6 @@
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/resolve-url/changelog.md",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/depd/Readme.md",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/depd/History.md",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/serve-index/public/icons/page_world.png",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/serve-index/public/icons/page_word.png",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/serve-index/public/icons/page_white_zip.png",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/upath/readme.md",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/for-in/README.md",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/has-value/README.md",
@@ -274,7 +275,6 @@
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/inherits/README.md",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/parseurl/README.md",
     "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/parseurl/HISTORY.md",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/on-headers/README.md",
-    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/on-headers/HISTORY.md"
+    "Transmisia Datelor/Lucrari Lab/Lab 3/client/node_modules/on-headers/README.md"
   ]
 }
