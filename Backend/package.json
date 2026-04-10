@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/Meszaros-Erik/G-Web#readme",
   "dependencies": {
-    "express": "^5.2.1"
-  },
-  "devDependencies": {}
+    "express": "^5.2.1",
+    "nodemailer": "^8.0.5"
+  }
 }
