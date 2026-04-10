@@ -1,44 +1,79 @@
-var playerTurn, moves, isGameOver, span, restartBtn;
+const board = document.querySelector('.board');
+const cells = document.querySelectorAll('.cell');
+const statusDisplay = document.querySelector('#status');
+const restartBtn = document.querySelector('#restartBtn');
 
-playerTurn = 'X';
-moves = 0;
-isGameOver = false;
-span = document.getElementsByTagName("span");
-restartBtn = ''
+let currentPlayer = "X";
+let gameState = ["", "", "", "", "", "", "", "", ""];
+let gameActive = true;
 
-function play(id) {
-    if(y.dataset.plaer == "none" && !isGameOver == false) {
-        y.innerHTML = playerTurn;
-        y.dataset.plaer = playerTurn;
-        moves++;
-        if(playerTurn == 'x') {
-            playerTurn = 'o';
-        } else if(playerTurn == 'o') {
-            playerTurn = 'x';
+const winningConditions = [
+    [0, 1, 2], [3, 4, 5], [6, 7, 8],
+    [0, 3, 6], [1, 4, 7], [2, 5, 8],
+    [0, 4, 8], [2, 4, 6]
+];
+
+function handleCellClick(e) {
+    const clickedCell = e.target;
+    const clickedCellIndex = parseInt(clickedCell.getAttribute('data-index'));
+
+    if (gameState[clickedCellIndex] !== "" || !gameActive) return;
+    updateCell(clickedCell, clickedCellIndex);
+    checkResult();
+}
+
+function updateCell(cell, index) {
+    gameState[index] = currentPlayer;
+    cell.innerText = currentPlayer;
+    cell.classList.add(currentPlayer.toLowerCase());
+}
+
+function checkResult() {
+    let roundWon = false;
+    let winningLine = [];
+
+    for (let i = 0; i < winningConditions.length; i++) {
+        const [a, b, c] = winningConditions[i];
+        if (gameState[a] && gameState[a] === gameState[b] && gameState[a] === gameState[c]) {
+            roundWon = true;
+            winningLine = [a, b, c];
+            break;
         }
     }
 
-    checkWinner(1, 2, 3);
-    checkWinner(4, 5, 6);
-    checkWinner(7, 8, 9);
-    checkWinner(1, 4, 7);
-    checkWinner(2, 5, 8);
-    checkWinner(3, 6, 9);
-    checkWinner(1, 5, 9);
-    checkWinner(3, 5, 7);
-
-    // No Winner
-    if(moves == 9 && isGameOver == false) { draw(); }
-}
-
-function checkWinner(a, b, c) {
-    a--; b--; c--;
-    if((span[a].dataset.plaer === span[b].dataset.plaer) && (span[b].dataset.plaer === span[c].dataset.plaer) && 
-    (span[a].dataset.plaer === span[c].dataset.plaer) && (span[a].dataset.plaer === "x" || span[a].dataset.plaer === "o")
-    && isGameOver == false) {
-        span[a].parentNode.className = " activeBox";
-        span[b].parentNode.className = " activeBox";
-        span[c].parentNode.className = " activeBox";
-        isGameOver(a);
+    if (roundWon) {
+        statusDisplay.innerText = `Győztes: ${currentPlayer}!`;
+        highlightWinners(winningLine);
+        gameActive = false;
+        return;
     }
+
+    if (!gameState.includes("")) {
+        statusDisplay.innerText = "Döntetlen!";
+        gameActive = false;
+        return;
+    }
+
+    currentPlayer = currentPlayer === "X" ? "O" : "X";
+    statusDisplay.innerText = `„${currentPlayer}” játékos jön`;
 }
+
+function highlightWinners(indices) {
+    indices.forEach(index => {
+        cells[index].classList.add('winner');
+    });
+}
+
+function restartGame() {
+    currentPlayer = "X";
+    gameState = ["", "", "", "", "", "", "", "", ""];
+    gameActive = true;
+    statusDisplay.innerText = "„X” játékos jön";
+    cells.forEach(cell => {
+        cell.innerText = "";
+        cell.classList.remove('x', 'o', 'winner');
+    });
+}
+
+cells.forEach(cell => cell.addEventListener('click', handleCellClick));
+restartBtn.addEventListener('click', restartGame);

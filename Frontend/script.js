@@ -55,7 +55,7 @@ toggleIcon.addEventListener('click', () => {
 });
 
 
-// --- Contact functionality ---
+/* --- Contact functionality --- Not functional yet, needs backend implementation and email service configuration ---
 const form = document.querySelector('form');
 const fullName = document.getElementById('name');
 const email = document.getElementById('email');
@@ -151,4 +151,4 @@ form.addEventListener('submit', (e) => {
     } else {
         console.log("Form contains errors, message not sent.");
     }
-});
+}); */

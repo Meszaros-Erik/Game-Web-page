@@ -1,0 +1,120 @@
+* {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+}
+
+body {
+    margin: 0;
+    background-color: #050a0f;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-family: 'Segoe UI', sans-serif;
+}
+
+.neo-pong-card {
+    width: 90vw;
+    max-width: 900px;
+    background: #0c141f;
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+    overflow: hidden;
+}
+
+.game-header {
+    background: rgba(255, 255, 255, 0.03);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.game-header .title {
+    color: #f0f6ff;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+.game-body {
+    position: relative;
+    width: 100%; height: 60vh;
+    background: #0c141f;
+}
+
+canvas {
+    display: block;
+    width: 100%; height: 100%;
+}
+
+.game-footer {
+    padding: 10px;
+    text-align: center;
+    font-size: 11px;
+    color: rgba(240, 246, 255, 0.4);
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.status-indicator {
+    color: #c9d1d9;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dot {
+    width: 8px;
+    height: 8px;
+    background: #4caf50;
+    border-radius: 50%;
+    box-shadow: 0 0 8px #4caf50;
+}
+
+.swal2-container {
+    backdrop-filter: blur(5px) saturate(80%);
+    background-color: rgba(12, 20, 31, 0.4);
+}
+
+.swal2-popup {
+    background: rgba(230, 235, 240, 0.15) !important;
+    backdrop-filter: blur(15px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    color: #e0e6ed !important;
+    font-family: inherit;
+}
+
+.swal2-title {
+    color: #f0f4f8 !important;
+    font-weight: 700;
+}
+
+.swal2-content, .swal2-html-container {
+    color: #c9d1d9 !important;
+}
+
+.swal2-icon {
+    border-color: rgba(255, 255, 255, 0.2) !important;
+}
+.swal2-icon.swal2-success .swal2-success-ring {
+    border: .25em solid rgba(165, 220, 134, 0.4);
+}
+
+.swal2-styled.swal2-confirm {
+    background-color: rgba(255, 255, 255, 0.2) !important;
+    color: #f0f4f8 !important;
+    border-radius: 8px;
+    transition: background-color 0.2s;
+}
+
+.swal2-styled.swal2-confirm:hover {
+    background-color: rgba(255, 255, 255, 0.3) !important;
+}
+
+.swal2-styled.swal2-confirm:focus {
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.1) !important;
+}
