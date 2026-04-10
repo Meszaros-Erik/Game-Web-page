@@ -23,6 +23,5 @@ The logic layer of the website is built with clean, maintainable, and modern Jav
     - **Regex Validation :** Uses robust Regular Expressions for client-side email verification.
 - **External Libraries :**
     - **[SweetAlert2](https://sweetalert2.github.io/) :** For beautiful, responsive, and customizable popup notifications upon form submission.
-    - **[SMTPJS](https://smtpjs.com/v3/smtp.js) :** Integrated to handle email communications directly from the frontend via **ElasticEmail**.
 ## How to Play
 Whether you're looking for a quick distraction or exploring simple game logic, these gems are polished and ready to play directly in your browser. No downloads or installations required-just click and play!

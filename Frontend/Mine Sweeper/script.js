@@ -1,5 +1,6 @@
 const grid = document.getElementById("grid");
 let lockGame = false;
+
 // Set test mode to true if you want see mines location
 const testMode = false;
 generateGrid();
@@ -37,11 +38,16 @@ function generateMines() {
 
 // Highlight all mines red
 function revealMines() {
+    let delay = 0;
     for (var i = 0; i < 10; i++) {
         for (var j = 0; j < 10; j++) {
             var cell = grid.rows[i].cells[j];
             if (cell.getAttribute("mine") == "true") {
-                cell.className = "mine";
+                setTimeout((c) => {
+                    c.className = "mine";
+                    c.innerHTML = "💣";
+                }, delay, cell);
+                delay += 50;
             }
         }
     }

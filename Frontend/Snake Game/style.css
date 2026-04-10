@@ -1,0 +1,115 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: radial-gradient(circle, #879cb8 0%, #2b4d4e 100%);
+    overflow: hidden;
+    touch-action: none;
+}
+
+.play-board {
+    aspect-ratio: 1 / 1;
+    width: 100%;
+    display: grid;
+    background: #171b26;
+    grid-template: repeat(30, 1fr) / repeat(30, 1fr);
+}
+
+.controls {
+    display: none;
+}
+
+.game-details {
+    color: #fff;
+    font-weight: 600;
+    font-size: 1.2rem;
+    padding: 20px 27px;
+    display: flex;
+    justify-content: space-between;
+    background: #293447;
+}
+
+.play-board {
+    height: 65vmin;
+    width: 100%;
+    display: grid;
+    background: #171b26;
+    grid-template: repeat(30, 1fr) / repeat(30, 1fr);
+}
+
+.play-board .food {
+    background: #ff3646;
+    border-radius: 4px;
+    box-shadow: 0 0 10px #ff3a4a;
+}
+
+.play-board .head {
+    background: #00fff2;
+    border-radius: 2px;
+}
+
+.desktop-info {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 15px;
+    background: #293447;
+    color: #60cbff;
+    font-size: 1rem;
+    font-weight: 600;
+    border-top: 1px solid #323c4e;
+}
+
+.desktop-info i {
+    margin: 0 10px;
+    font-size: 1.2rem;
+    color: #fff;
+    background: #1e2636;
+    padding: 5px 10px;
+    border-radius: 5px;
+    border: 1px solid #60cbff;
+}
+
+@media screen and (max-width: 800px) {
+    .desktop-info {
+        display: none;
+    }
+
+    .controls {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+        padding: 20px;
+        background: #293447;
+    }
+
+    .controls i[data-key="ArrowUp"]    { grid-column: 2; grid-row: 1; }
+    .controls i[data-key="ArrowLeft"]  { grid-column: 1; grid-row: 2; }
+    .controls i[data-key="ArrowDown"]  { grid-column: 2; grid-row: 2; }
+    .controls i[data-key="ArrowRight"] { grid-column: 3; grid-row: 2; }
+
+    .controls i {
+        padding: 15px;
+        font-size: 1.8rem;
+        color: #60cbff;
+        background: #1e2636;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px #000;
+    }
+    
+    .wrapper {
+        width: 100vmin;
+        border-radius: 0;
+    }
+}

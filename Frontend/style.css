@@ -10,6 +10,16 @@
     --icon-shadow: rgba(0, 0, 0, .1);
 }
 
+.dark-mode {
+    --main-color: #3d5ccc;
+    --bg-color: #0b061f;
+    --card-bg: #161030;
+    --text-dark: #fff;
+    --text-grey: #ccc;
+    --header-bg: #0b061f;
+    --white: #161030; 
+}
+
 * {
     margin: 0; padding: 0;
     box-sizing: border-box;
@@ -28,6 +38,9 @@ html {
 body {
     background: var(--bg-color);
     color: var(--text-dark);
+    overflow-x: hidden;
+    width: 100%;
+    transition: .3s ease, color .3s ease;
 }
 
 ::-webkit-scrollbar {
@@ -54,6 +67,7 @@ header {
     align-items: center;
     z-index: 1000;
     transition: .5s;
+    box-shadow: 0 .5rem 1rem rgba(0,0,0,.1);
 }
 
 header .logo {
@@ -93,6 +107,9 @@ header .navbar a.active {
 
 /* Header icons & mobile menu btn */
 .header-icons {
+    position: absolute;
+    right: 35px; top: 50%;
+    transform: translateY(-50%);
     display: flex;
     align-items: center;
 }
@@ -108,6 +125,42 @@ header .bx-menu {
     display: none;
 }
 
+/* --- Dark mode toggle --- */
+.toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.8rem 1.2rem;
+    background: transparent;
+    border: 2px solid var(--main-color);
+    border-radius: 0.8rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.toggle:hover {
+    background: var(--main-color);
+    box-shadow: 0 0 1rem var(--main-color);
+}
+
+.toggle .toggle-icon {
+    font-size: 2.2rem;
+    color: var(--text-dark);
+    transition: 0.3s;
+}
+
+.toggle:hover .toggle-icon {
+    color: #fff;
+}
+
+.dark-mode .toggle {
+    border-color: var(--main-color);
+}
+
+.dark-mode .toggle .toggle-icon {
+    color: #fff;
+}
+
 /* --- Home Section --- */
 .home {
     position: relative;
@@ -116,17 +169,18 @@ header .bx-menu {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 10rem 8% 0;
+    padding: 15rem 8% 5rem;
     overflow: hidden;
 }
 
 .home-content {
     max-width: 63rem;
-    z-index: 1;
+    z-index: 10;
 }
 
 .home-content h1 {
     font-size: 5rem;
+    color: var(--text-dark);
     line-height: 1.2;
     opacity: 0;
     animation: slideBottom 1s ease forwards;
@@ -202,8 +256,8 @@ header .bx-menu {
 
 .home .rhombus2 {
     position: absolute;
-    top: -25%; right: -25%;
-    width: 80rem; height: 80rem;
+    top: -25%;  right: -30%;
+    width: 80rem;  height: 80rem;
     background: var(--main-color);
     transform: rotate(45deg);
     z-index: -1;
@@ -326,18 +380,11 @@ section {
     line-height: 5rem;
     font-size: 2rem;
     width: 50%;
-    background: var(--text-grey);
-    color: #fff;
+    background: var(--main-color);
+    color: var(--white);
 }
-
-.games .box-container .box .image .icons .cart-btn {
-    border-left: .1rem solid #fff7;
-    border-right: .1rem solid #fff7;
-    width: 100%;
-}
-
 .games .box-container .box .image .icons a:hover {
-    background: #333;
+    background: var(--text-dark);
 }
 
 .games .box-container .box .content {
@@ -348,7 +395,7 @@ section {
 
 .games .box-container .box .content h3 {
     font-size: 2rem;
-    color: #333;
+    color: var(--text-dark);
 }
 
 /* --- Contact Section --- */
@@ -453,9 +500,7 @@ form .textarea-field .error-text {
 
 /* --- Media Queries --- */
 @media(max-width: 1024px){
-    .games .box-container {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    .games .box-container { grid-template-columns: repeat(2, 1fr); }
 }
 
 @media(max-width: 991px){
@@ -469,19 +514,28 @@ form .textarea-field .error-text {
     header .navbar {
         position: absolute;
         top: 100%; left: 0; right: 0;
-        background: #fff;
+        background: var(--white);
         border-top: .1rem solid rgba(0, 0, 0, .1);
         clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
         transition: .3s linear;
     }
 
-    header #toggler:checked ~ .navbar {
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%);
+    header #toggler:checked ~ .navbar { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
+
+    .header-icons {
+        order: 3;
+        position: static;
+        transform: none;
+        display: flex;
+    }
+
+    .toggle {
+        padding: 0.5rem 1rem;
+        border-width: 1px;
     }
 
     header .navbar a {
-        margin: 1.5rem;
-        padding: 1.5rem;
+        margin: 1.5rem;padding: 1.5rem;
         background: var(--bg-color);
         display: block;
         opacity: 1;
@@ -492,29 +546,46 @@ form .textarea-field .error-text {
         flex-direction: column-reverse;
         justify-content: center;
         text-align: center;
-        padding-top: 15rem;
+        padding-top: 12rem;
     }
 
-    .home-content { max-width: 100%; }
-    .home-img { 
-        right: 0; 
-        width: 30rem; 
-        height: 30rem; 
-        margin-bottom: 5rem;
+    .home-content { 
+        max-width: 100%; 
+        margin-top: 5rem;
     }
-    .home-img .rhombus img { width: 50rem; left: -15rem; top: 8rem; }
+
+    .home-content h1 { font-size: 3.5rem; }
+    .home-content h3 { font-size: 2.5rem; }
+
+    .home-img { 
+        right: 0;
+        width: 25rem; height: 25rem; 
+        margin: 0 auto;
+        transform: rotate(45deg);
+    }
+
+    .home-img .rhombus img { 
+        width: 110%; height: auto;
+        left: 2%; top: 10%;
+        transform: rotate(-45deg);
+    }
+
+    .home .rhombus2 {
+        width: 50rem; height: 50rem;
+        top: -10%; right: -20%;
+    }
     .input-box .input-field { width: 100%; }
 }
 
 @media(max-width: 600px){
-    .games .box-container {
-        grid-template-columns: 1fr;
-    }
+    .games .box-container { grid-template-columns: 1fr; }
 }
 
 @media(max-width: 450px){
     html { font-size: 50%; }
     .heading { font-size: 3rem; }
+    .home-img { width: 20rem; height: 20rem; }
+    .home-content h1 { font-size: 3rem; }
 }
 
 /* --- Keyframes Animation --- */

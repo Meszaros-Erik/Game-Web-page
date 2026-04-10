@@ -23,18 +23,19 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: Figtree;
-  background-color: var(--alice-blue);
-  min-height: 75vh;
+  font-family: 'Figtree', sans-serif;
+  background: linear-gradient(135deg, #1a695c 0%, #35495e 100%);
+  min-height: 100vh;
+  margin: 0;
   user-select: none;
+  color: white;
 }
 
 .container {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
-  margin: 6em 0 0 0;
+  align-items: center;
+  gap: 20px;
 }
 
 .score {
@@ -47,7 +48,6 @@ body {
   padding: 0.3em;
   border-radius: 0.25em;
 }
-
 .score:hover {
   background-color: var(--boston-blue);
   transition: 0.2s ease;
@@ -58,13 +58,70 @@ body {
   color: var(--white);
 }
 
+.header-top {
+  display: flex;
+  gap: 1em;
+  align-items: center;
+  margin-bottom: 1em;
+}
+
+.stats-container {
+  display: flex;
+  gap: 20px; width: 100%;
+  justify-content: center;
+}
+
+.stat-box {
+  background-color: var(--cello);
+  padding: 0.5em 1.5em;
+  border-radius: 0.4em;
+  min-width: 100px;
+  text-align: center;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+}
+
+.stat-box h2 {
+  font-size: 1.1rem;
+  margin: 0;
+}
+
+#board {
+  margin: 0 !important; 
+}
+
+#reset-btn {
+  background-color: var(--orange);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 8px;
+  font-weight: bold;
+  font-size: 1.2rem;
+  margin-top: 10px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+}
+#reset-btn:hover {
+  background-color: var(--red);
+  transform: translateY(-2px);
+}
+
+#reset-btn:active {
+  transform: scale(0.95);
+}
+
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
 #board {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-  width: 25em;
-  height: 25em;
+  width: 25em; height: 25em;
   background-color: var(--cello);
   border: 0.4em solid var(--cello);
   border-radius: 0.4em;

@@ -1,0 +1,106 @@
+:root {
+    --bg-color: #1a1a2e;
+    --card-bg: #16213e;
+    --accent-color: #4ecca3;
+    --mine-color: #e94560;
+    --cell-bg: #0f3460;
+    --cell-hover: #533483;
+    --text-color: #e9ecef;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    margin-bottom: 20px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--accent-color);
+    text-shadow: 0 0 15px rgba(78, 204, 163, 0.3);
+}
+
+#grid {
+    margin-left: auto;
+    margin-right: auto;
+    border-collapse: separate;
+    border-spacing: 4px;
+    table-layout: fixed;
+}
+
+#grid tr td {
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    line-height: 40px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: var(--cell-bg);
+    color: var(--text-color);
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.1s;
+    border: none;
+}
+#grid tr td:hover:not(.active):not(.mine) {
+    background-color: var(--cell-hover);
+    transform: scale(1.05);
+}
+
+#grid tr td.active {
+    background-color: #1a1a2e;
+    color: var(--accent-color);
+    cursor: default;
+}
+
+#grid tr td.mine {
+    background-color: var(--mine-color);
+    box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+}
+
+.game-info {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 20px;
+    font-family: 'Courier New', Courier, monospace;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--accent-color);
+}
+
+button {
+    margin-top: 30px;
+    padding: 12px 35px;
+    font-size: 1rem;
+    font-weight: bold;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    color: white;
+    background: linear-gradient(135deg, #4ecca3 0%, #45b293 100%);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(78, 204, 163, 0.3);
+}
+button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(78, 204, 163, 0.5);
+    background: linear-gradient(135deg, #58e2b5 0%, #4ecca3 100%);
+}
+button:active {
+    transform: translateY(-1px);
+}

@@ -46,6 +46,15 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
+// --- Dark mode toggle functionality ---
+const toggleIcon = document.querySelector('.toggle-icon');
+
+toggleIcon.addEventListener('click', () => {
+    toggleIcon.classList.toggle('bx-sun');
+    document.body.classList.toggle('dark-mode');
+});
+
+
 // --- Contact functionality ---
 const form = document.querySelector('form');
 const fullName = document.getElementById('name');
