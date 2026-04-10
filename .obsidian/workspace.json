@@ -228,8 +228,9 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "3b7588c59cc2ce5e",
+  "active": "041d2aee37a23334",
   "lastOpenFiles": [
+    "README.md",
     "Backend/server.js",
     "Backend/package-lock.json",
     "Backend/package.json",
@@ -240,7 +241,6 @@
     "Backend/node_modules/iconv-lite/encodings/tables/shiftjis.json",
     "Backend/node_modules/iconv-lite/encodings/tables/gb18030-ranges.json",
     "Backend/node_modules/iconv-lite/encodings/tables/cp949.json",
-    "Backend/node_modules/iconv-lite/encodings/tables/cp950.json",
     "Backend/node_modules/wrappy/README.md",
     "Backend/node_modules/unpipe/README.md",
     "Backend/node_modules/unpipe/HISTORY.md",
