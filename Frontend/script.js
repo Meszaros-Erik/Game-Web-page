@@ -54,8 +54,7 @@ toggleIcon.addEventListener('click', () => {
     document.body.classList.toggle('dark-mode');
 });
 
-
-/* --- Contact functionality --- Not functional yet, needs backend implementation and email service configuration ---
+// --- Connection functions ---
 const form = document.querySelector('form');
 const fullName = document.getElementById('name');
 const email = document.getElementById('email');
@@ -64,54 +63,91 @@ const subject = document.getElementById('subject');
 const mess = document.getElementById('message');
 
 function sendEmail() {
-    const bodyMessage = `Full Name: ${fullName.value}<br> Email: ${email.value}<br> Phone: ${phone.value}<br> Subject: ${subject.value}<br> Message: ${mess.value}`;
-    
-    Email.send({
-        // SecureToken: "",
-        Host: "smtp.elasticemail.com",
-        Username: "",
-        Password: "",
-        To: "",
-        From: "",
-        Subject: subject.value,
-        Body: bodyMessage
-    }).then(
-        message => {
-            if (message === 'OK') {
-                Swal.fire({
-                    position: "bottom-end",
-                    icon: "success",
-                    title: "Success!",
-                    text: "Message sent successfully!",
-                    showConfirmButton: false,
-                    timer: 1500
-                });
-                form.reset();
-            }
+    // Collecting data into an object
+    const formData = {
+        name: fullName.value,
+        email: email.value,
+        phone: phone.value,
+        subject: subject.value,
+        message: mess.value
+    };
+
+    // Sending to your own Node.js server
+    fetch('/contact', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.success) {
+            Swal.fire({
+                position: "center",
+                icon: "success",
+                title: "Success!",
+                text: "Your message has been sent to the server!",
+                showConfirmButton: false,
+                timer: 2000
+            });
+            form.reset(); // Reset form fields
+        } else {
+            throw new Error('Server error');
         }
-    );
-} 
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "Something went wrong while sending the message. Is the server running?",
+        });
+    });
+}
 
 function checkInputs() {
     const items = document.querySelectorAll('.item');
     let hasError = false;
 
-    for(const item of items) {
+    for (const item of items) {
         item.parentElement.classList.remove('error');
-        if (item.value == '') {
+        if (item.value.trim() == '') {
             item.parentElement.classList.add('error');
             hasError = true;
         }
-    }    
-    
+    }
+
     if (email.value != '') {
-        if (checkEmail()) { 
-            hasError = true; 
+        if (checkEmail()) {
+            hasError = true;
         }
     }
     return hasError;
 }
 
+function checkEmail() {
+    const emailRegex = /^([a-z\d.-]+)@([a-z\d-]+)\.([a-z]{2,3})(\.[a-z]{2,3})?$/;
+    const emailParent = email.parentElement;
+    const errorTxt = emailParent.querySelector('.error-text');
+    let isInvalid = false;
+
+    emailParent.classList.remove('error');
+
+    if (email.value == "") {
+        emailParent.classList.add('error');
+        if (errorTxt) errorTxt.innerText = "Email Address can't be blank";
+        isInvalid = true;
+    } else if (!email.value.match(emailRegex)) {
+        emailParent.classList.add('error');
+        if (errorTxt) errorTxt.innerText = "Enter a valid email address";
+        isInvalid = true;
+    }
+
+    return isInvalid;
+}
+
+// Monitor fields while typing (suppress error messages)
 document.querySelectorAll('.item').forEach(item => {
     item.addEventListener('keyup', () => {
         if (item.value != '') {
@@ -122,26 +158,7 @@ document.querySelectorAll('.item').forEach(item => {
     });
 });
 
-function checkEmail() {
-    const emailRegex = /^([a-z\d.-]+)@([a-z\d-]+)\.([a-z]{2,3})(\.[a-z]{2,3})?$/;
-    const emailParent = email.parentElement;
-    const errorTxt = emailParent.querySelector('.error-text');
-    emailParent.classList.remove('error');
-
-    if (email.value == "") {
-        emailParent.classList.add('error');
-        if(errorTxt) errorTxt.innerText = "Email Address can't be blank";
-        emailError = true;
-    } else if (!email.value.match(emailRegex)) {
-        emailParent.classList.add('error');
-        if(errorTxt) errorTxt.innerText = "Enter a valid email address";
-        emailError = true;
-    } else {
-        emailParent.classList.remove('error');
-    }
-    return emailError;
-}
-
+// Form submission
 form.addEventListener('submit', (e) => {
     e.preventDefault();
     const isError = checkInputs();
@@ -149,6 +166,6 @@ form.addEventListener('submit', (e) => {
     if (!isError) {
         sendEmail();
     } else {
-        console.log("Form contains errors, message not sent.");
+        console.log("The form contains errors, not submitting.");
     }
-}); */
+});

@@ -40,20 +40,20 @@ app.post('/contact', async (req, res) => {
     const transporter = nodemailer.createTransport({ 
         service: 'gmail', 
         auth: { 
-            user: 'SAJAT_GMAIL_CIMED@gmail.com', 
-            pass: 'GO_TO_THE_APPLICATION_PASSWORD' 
+            user: 'me-email-address@gmail.com', 
+            pass: 'app_Password' 
         } 
     }); 
 
     const mailOptions = { 
         from: email, 
-        to: 'SAJAT_GMAIL_CIMED@gmail.com', 
+        to: 'me-email-address@gmail.com', 
         subject: `Game Room Support: ${subject}`, 
         text: `From: ${name}\nEmail: ${email}\nPhone: ${phone}\n\nMessage:\n${message}`
     };
     try {
         // If you don't want to send it live yet, comment this part out
-        // await transporter.sendMail(mailOptions);
+        /* await transporter.sendMail(mailOptions); */
         console.log("✅ Email successfully logged/sent!");
         res.status(200).json({ success: true, message: "Message sent!" });
     } catch (error) {
