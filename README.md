@@ -5,6 +5,9 @@
 - **Snake Game :** A tribute to the legendary Nokia-era classic.
 - **Mine Sweeper :** A strategic battle against hidden explosives.
 - **Lottery Spin Wheel & Roll Dice :** Interactive tools for games of chance and quick decision-making.  
+- **Rol Dice :** - 
+- **Simple X-O :** - 
+- **Ping-Pong Game :** - 
 
 ---
 ## Technical Overview
