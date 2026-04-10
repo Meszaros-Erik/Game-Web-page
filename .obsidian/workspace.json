@@ -230,6 +230,8 @@
   },
   "active": "3b7588c59cc2ce5e",
   "lastOpenFiles": [
+    "Backend/server.js",
+    "Backend/package-lock.json",
     "Backend/package.json",
     "Backend/node_modules/object-inspect/test/browser/dom.js",
     "Backend/node_modules/iconv-lite/lib/helpers/merge-exports.js",
@@ -239,8 +241,6 @@
     "Backend/node_modules/iconv-lite/encodings/tables/gb18030-ranges.json",
     "Backend/node_modules/iconv-lite/encodings/tables/cp949.json",
     "Backend/node_modules/iconv-lite/encodings/tables/cp950.json",
-    "Backend/node_modules/iconv-lite/encodings/tables/cp936.json",
-    "Backend/node_modules/iconv-lite/encodings/tables/big5-added.json",
     "Backend/node_modules/wrappy/README.md",
     "Backend/node_modules/unpipe/README.md",
     "Backend/node_modules/unpipe/HISTORY.md",
