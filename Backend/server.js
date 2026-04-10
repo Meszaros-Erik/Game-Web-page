@@ -66,8 +66,8 @@ app.post('/contact', async (req, res) => {
 const IP_ADDRESS = getLocalIP();
 
 app.listen(PORT, '0.0.0.0', () => {
-    console.log(`🚀 GAME SERVER ONLINE`);
-    console.log(`🏠 Local:   http://localhost:${PORT}`);
-    console.log(`🌐 Network: http://${IP_ADDRESS}:${PORT}`);
-    console.log(`📂 Mappa:   ${frontendPath}`);
+    console.log(`🚀 Game Server Online!`);
+    console.log(`🏠 Local :   http://localhost:${PORT}`);
+    console.log(`🌐 Network : http://${IP_ADDRESS}:${PORT}`);
+    console.log(`📂 Folder :   ${frontendPath}`);
 });
