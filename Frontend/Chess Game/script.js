@@ -1,106 +1,115 @@
-// Wait for the DOM to be fully loaded before executing code
 document.addEventListener('DOMContentLoaded', () => {
-    let board = null; // Initialize the chessboard
-    const game = new Chess(); // Create new Chess.js game instance
-    const moveHistory = document.getElementById('move-history'); // Get move history container
-    let moveCount = 1; // Initialize the move count
-    let userColor = 'w'; // Initialize the user's color as white
+    let board = null;
+    let game = new Chess();
+    const moveHistory = document.getElementById('move-history');
+    let moveCount = 1;
 
-    // Function to make a random move for the computer
-    const makeRandomMove = () => {
-        const possibleMoves = game.moves();
-
+    function checkGameState() {
         if (game.game_over()) {
-            alert("Checkmate!");
-        } else {
-            const randomIdx = Math.floor(Math.random() * possibleMoves.length);
-            const move = possibleMoves[randomIdx];
-            game.move(move);
-            board.position(game.fen());
-            recordMove(move, moveCount); // Record and display the move with move count
-            moveCount++; // Increament the move count
+            let message = "Game Over";
+            if (game.in_checkmate()) message = "Checkmate!";
+            else if (game.in_draw()) message = "Draw!";
+            Swal.fire('Info', message, 'info');
         }
-    };
+    }
 
-    // Function to record and display a move in the move history
-    const recordMove = (move, count) => {
-        const formattedMove = count % 2 === 1 ? `${Math.ceil(count / 2)}. ${move}` : `${move} -`;
-        moveHistory.textContent += formattedMove + ' ';
-        moveHistory.scrollTop = moveHistory.scrollHeight; // Auto-scroll to the latest move
-    };
+    const makeRandomMove = () => {
+        const moves = game.moves();
+        if (game.game_over()) return checkGameState();
 
-    // Function to handle the start of a drag position
-    const onDragStart = (source, piece) => {
-        // Allow the user to drag only their own pieces based on color
-        return !game.game_over() && piece.search(userColor) === 0;
-    };
-
-    // Function to handle a piece drop on the board
-    const onDrop = (source, target) => {
-        const move = game.move({
-            from: source,
-            to: target,
-            promotion: 'q',
-        });
-
-        if (move === null) return 'snapback';
-
-        window.setTimeout(makeRandomMove, 250);
-        recordMove(move.san, moveCount); // Record and display the move with move count
+        const move = moves[Math.floor(Math.random() * moves.length)];
+        game.move(move);
+        board.position(game.fen());
+        recordMove(move, moveCount);
         moveCount++;
     };
 
-    // Function to handle the end of a piece snap animation
-    const onSnapEnd = () => {
-        board.position(game.fen());
+    const recordMove = (move, count) => {
+        const round = Math.ceil(count / 2);
+        const entry = count % 2 === 1 ? `<strong>${round}.</strong> ${move}` : `${move} &nbsp;`;
+        moveHistory.innerHTML += entry + ' ';
+        moveHistory.scrollTop = moveHistory.scrollHeight;
     };
 
-    // Configuration options for the chessboard
+    const onDrop = (source, target) => {
+        const move = game.move({ from: source, to: target, promotion: 'q' });
+        if (move === null) return 'snapback';
+
+        recordMove(move.san, moveCount);
+        moveCount++;
+        window.setTimeout(makeRandomMove, 250);
+    };
+
     const boardConfig = {
-        showNotation: true,
         draggable: true,
         position: 'start',
-        onDragStart,
-        onDrop,
-        onSnapEnd,
-        moveSpeed: 'fast',
-        snapBackSpeed: 500,
-        snapSpeed: 100,
+        onDrop: onDrop,
+        onSnapEnd: () => board.position(game.fen()),
+        pieceTheme: 'https://chessboardjs.com/img/chesspieces/wikipedia/{piece}.png'
     };
 
-    // Initialize the chessboard
     board = Chessboard('board', boardConfig);
 
-    // Event listener for the "Play Again" button
+    // Btn: Reset Game
     document.querySelector('.play-again').addEventListener('click', () => {
         game.reset();
         board.start();
-        moveHistory.textContent = '';
+        moveHistory.innerHTML = '';
         moveCount = 1;
-        userColor = 'w';
     });
 
-    // Event listener for the "Set Position" button
-    document.querySelector('.set-pos').addEventListener('click', () => {
-        const fen = prompt("Enter the FEN notation for the desired position!");
-        if (fen !== null) {
-            if (game.load(fen)) {
-                board.position(fen);
-                moveHistory.textContent = '';
-                moveCount = 1;
-                userColor = 'w';
-            } else {
-                alert("Invalid FEN notation. Please try again.");
-            }
+    // Btn: Flip View
+    document.querySelector('.flip-board').addEventListener('click', () => {
+        board.flip();
+    });
+
+    // Btn: Set Position & Move Count
+    document.querySelector('.set-pos').addEventListener('click', async () => {
+    if (typeof Swal === 'undefined') {
+        console.error("SweetAlert2 is not loaded!");
+        alert("Error: SweetAlert library missing. Check your HTML!");
+        return;
+    }
+
+    const { value: formValues } = await Swal.fire({
+        title: 'Load Position',
+        html:
+            '<div style="text-align:left; color:#64748b; font-size:14px;">FEN String:</div>' +
+            '<input id="swal-fen" class="swal2-input" placeholder="Paste FEN here...">' +
+            '<div style="text-align:left; color:#64748b; font-size:14px; margin-top:10px;">Move Number:</div>' +
+            '<input id="swal-count" type="number" class="swal2-input" value="1">',
+        focusConfirm: false,
+        showCancelButton: true,
+        confirmButtonText: 'Sync Board',
+        confirmButtonColor: '#4f46e5',
+        preConfirm: () => {
+            return [
+                document.getElementById('swal-fen').value,
+                document.getElementById('swal-count').value
+            ]
         }
     });
 
-    // Event listener for the "Flip Board" button
-    document.querySelector('.flip-board').addEventListener('click', () => {
-        board.flip();
-        makeRandomMove();
-        // Toggle user's color after flipping the board
-        userColor = userColor === 'w' ? 'b' : 'w';
-    });
+    if (formValues && formValues[0]) {
+        const fen = formValues[0];
+        const count = formValues[1];
 
+        if (game.load(fen)) {
+            board.position(fen);
+            moveCount = parseInt(count) || 1;
+            moveHistory.innerHTML = `<div style="color:#4f46e5; padding:5px; font-weight:bold;">Resumed from move ${moveCount}</div>`;
+            
+            Swal.fire({
+                icon: 'success',
+                title: 'Position Loaded',
+                timer: 1500,
+                showConfirmButton: false
+            });
+        } else {
+            Swal.fire('Invalid FEN', 'The code you entered is not a valid chess position.', 'error');
+        }
+    }
+});
+
+    window.addEventListener('resize', board.resize);
 });

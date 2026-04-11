@@ -9,17 +9,27 @@
         <title>Chess Game</title>
     </head>
     <body>
-        <div class="container">
-            <h1>Chess Game</h1>
-            <div class="board" id="board"></div>
-            <div class="buttons">
-                <button class="play-again">Play Again</button>
-                <button class="set-pos">Set Position</button>
-                <button class="flip-board">Flip Board</button>
-            </div>
-            <div id="move-history" class="move-history"></div>
+        <div class="app-shell">
+            <header>
+                <h1>Chess <span class="accent">Studio</span></h1>
+            </header>
+            
+            <main class="game-container">
+                <div id="board" class="glass-board"></div>
+
+                <div class="move-log-container">
+                    <div id="move-history" class="move-log"></div>
+                </div>
+
+                <div class="control-grid">
+                    <button class="btn btn-action play-again">New Game</button>
+                    <button class="btn btn-action set-pos">Set Position</button>
+                    <button class="btn btn-full flip-board">Flip View</button>
+                </div>
+            </main>
         </div>
 
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
         <script src="js/chessboard-1.0.0.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/chess.js/0.10.3/chess.min.js"></script>
