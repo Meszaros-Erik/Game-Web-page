@@ -17,7 +17,16 @@
     --text-dark: #fff;
     --text-grey: #ccc;
     --header-bg: #0b061f;
-    --white: #161030; 
+    --white: #161030;
+    --toggle-bg-highlight: rgba(255, 255, 255, 0.08);
+    --toggle-border-highlight: rgba(255, 255, 255, 0.16);
+    --toggle-hover-bg: rgba(22, 64, 214, 0.3);
+    --toggle-hover-shadow: rgba(22, 64, 214, 0.45);
+    --btn-bg-accent: rgba(22, 64, 214, 0.22);
+    --btn-border-accent: #2d58ff;
+    --btn-shadow-accent: rgba(45, 88, 255, 0.35);
+    --btn-hover-bg-accent: rgba(45, 88, 255, 0.35);
+    --btn-hover-border-accent: #4d73ff;
 }
 
 * {
@@ -89,6 +98,10 @@ header .logo span {
     color: var(--main-color);
 }
 
+header .navbar {
+    margin-right: 12rem;
+}
+
 header .navbar a {
     display: inline-block;
     font-size: 1.8rem;
@@ -108,10 +121,11 @@ header .navbar a.active {
 /* Header icons & mobile menu btn */
 .header-icons {
     position: absolute;
-    right: 35px; top: 50%;
+    right: 2.2rem; top: 50%;
     transform: translateY(-50%);
     display: flex;
     align-items: center;
+    gap: 1.5rem;
 }
 
 header #toggler {
@@ -130,12 +144,11 @@ header .bx-menu {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0.8rem 1.2rem;
     background: transparent;
-    border: 2px solid var(--main-color);
-    border-radius: 0.8rem;
+    border: none;
+    padding: 0.5rem;
     cursor: pointer;
-    transition: all 0.3s ease;
+    transition: 0.3s;
 }
 
 .toggle:hover {
@@ -144,21 +157,39 @@ header .bx-menu {
 }
 
 .toggle .toggle-icon {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     color: var(--text-dark);
-    transition: 0.3s;
 }
-
 .toggle:hover .toggle-icon {
-    color: #fff;
+    color: var(--white);
 }
 
 .dark-mode .toggle {
-    border-color: var(--main-color);
+    background: var(--toggle-bg-highlight);
+    border-radius: .6rem;
+    box-shadow: inset 0 0 0 1px var(--toggle-border-highlight);
+}
+
+.dark-mode .toggle:hover {
+    background: var(--toggle-hover-bg);
+    box-shadow: 0 0 1rem var(--toggle-hover-shadow);
 }
 
 .dark-mode .toggle .toggle-icon {
-    color: #fff;
+    color: var(--text-dark);
+}
+
+.dark-mode .btn {
+    color: var(--text-dark);
+    background: var(--btn-bg-accent);
+    border: .2rem solid var(--btn-border-accent);
+    box-shadow: 0 0 .8rem var(--btn-shadow-accent);
+}
+
+.dark-mode .btn:hover {
+    background: var(--btn-hover-bg-accent);
+    border-color: var(--btn-hover-border-accent);
+    color: var(--text-dark);
 }
 
 /* --- Home Section --- */
@@ -523,15 +554,20 @@ form .textarea-field .error-text {
     header #toggler:checked ~ .navbar { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
 
     .header-icons {
-        order: 3;
         position: static;
         transform: none;
-        display: flex;
+        margin-left: auto;
+        margin-right: 1rem;
+        gap: 1rem;
     }
 
     .toggle {
         padding: 0.5rem 1rem;
         border-width: 1px;
+    }
+
+    header .navbar {
+        margin-right: 0;
     }
 
     header .navbar a {
