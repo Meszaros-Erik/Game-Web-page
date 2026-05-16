@@ -171,6 +171,110 @@ body {
     transform: translateX(200%);
 }
 
+/* --- Password showing/hiding --- */
+.password-input-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.password-input-container input {
+    width: 100%; margin: 8px 0;
+    padding-right: 40px;
+}
+
+.password-input-container input[type="password"] {
+    font-size: 22px;
+    letter-spacing: 3px;
+}
+.password-input-container input[type="password"]::placeholder {
+    font-size: 13px;
+    letter-spacing: normal;
+}
+
+.eye-icon {
+    position: absolute;
+    right: 15px;
+    color: #777;
+    cursor: pointer;
+    font-size: 18px;
+    z-index: 10;
+    transition: color 0.3s;
+}
+.eye-icon:hover {
+    color: #1a36d8;
+}
+
+/* --- Media Queries --- */
+.mobile-toggle {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding: 20px;
+    }
+
+    .container {
+        width: 100%;
+        max-width: 400px;
+        min-height: 500px;
+        height: auto;
+    }
+
+    .form-container {
+        width: 100%; height: 100%;
+        position: absolute;
+        top: 0; left: 0;
+        transition: opacity 0.4s ease-in-out, visibility 0.4s;
+    }
+
+    .sign-in {
+        opacity: 1;
+        z-index: 2;
+        visibility: visible;
+    }
+
+    .sign-up {
+        opacity: 0;
+        z-index: 1;
+        visibility: hidden;
+    }
+
+    .container.active .sign-in {
+        transform: none !important;
+        opacity: 0;
+        z-index: 1;
+        visibility: hidden;
+    }
+
+    .container.active .sign-up {
+        transform: none !important;
+        opacity: 1;
+        z-index: 2;
+        visibility: visible;
+        animation: none !important;
+    }
+
+    .toggle-container {
+        display: none !important;
+    }
+
+    .mobile-toggle {
+        display: block;
+        margin-top: 20px;
+        font-size: 13px;
+        color: #333;
+        cursor: pointer;
+    }
+    
+    .mobile-toggle b {
+        color: #1a36d8;
+    }
+}
+
+/* --- Keyframes Animation --- */
 @keyframes move {
     0%, 49.99%{
         opacity: 0;

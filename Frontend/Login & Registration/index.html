@@ -5,12 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie=edge">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="website icon" type="png" href="logo.png">
+        <link rel="website icon" type="png" href="../image/logo.png">
         <link rel="stylesheet" href="style.css">
         <title>Login</title>
     </head>
     <body>
-
         <div class="container" id="container">
             <div class="form-container sign-up">
                 <form>
@@ -19,20 +18,29 @@
                     <span>Or use your email for registeration</span>
                     <input type="text" placeholder="Name">
                     <input type="email" placeholder="Email">
-                    <input type="password" placeholder="Password">
-                    <button>Sign Up</button>
+                    <div class="password-input-container">
+                        <input type="password" id="register-password" placeholder="Password" required>
+                        <i class='bx bx-hide eye-icon' id="toggle-register-password"></i>
+                    </div>
+                    <button type="submit">Sign Up</button>
+                    <br>
+                    <span class="mobile-toggle" id="to-login-mobile">Already have an account? <b>Sign In</b></span>
                 </form>
             </div>
 
             <div class="form-container sign-in">
                 <form>
                     <h1>Sign In</h1>
-                    <br></br>
+                    <br>
                     <span>Or use your email password</span>
                     <input type="email" placeholder="Email">
-                    <input type="password" placeholder="Password">
-                    <a href="#">Forget Your Password?</a>
-                    <button>Sign In</button>
+                    <div class="password-input-container">
+                        <input type="password" id="login-password" placeholder="Password" required>
+                        <i class='bx bx-hide eye-icon' id="toggle-login-password"></i>
+                    </div>
+                    <button type="submit">Sign In</button>
+                    <br>
+                    <span class="mobile-toggle" id="to-register-mobile">Don't have an account? <b>Sign Up</b></span>
                 </form>
             </div>
             <div class="toggle-container">
@@ -51,7 +59,6 @@
             </div>
         </div>
 
-        <!-- JavaScript -->
         <script src="script.js"></script>
     </body>
 </html>
