@@ -1,16 +1,3 @@
-// Instantly Check Dark Mode
-if (localStorage.getItem('darkMode') === 'enabled') {
-    document.body.classList.add('dark-mode');
-}
-
-// --- Dark mode toggle functionality ---
-const toggleIcon = document.querySelector('.toggle-icon');
-
-toggleIcon.addEventListener('click', () => {
-    toggleIcon.classList.toggle('bx-sun');
-    document.body.classList.toggle('dark-mode');
-});
-
 document.addEventListener('DOMContentLoaded', () => {
     renderWishlist();
 });

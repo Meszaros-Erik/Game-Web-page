@@ -5,7 +5,7 @@ const loginBtn = document.getElementById('login');
 const toRegisterMobile = document.getElementById('to-register-mobile');
 const toLoginMobile = document.getElementById('to-login-mobile');
 
-// --- Desktop → Mobil ---
+// Desktop → Mobil
 registerBtn.addEventListener('click', () => {
     container.classList.add("active");
 });
@@ -22,7 +22,7 @@ toLoginMobile.addEventListener('click', () => {
     container.classList.remove("active");
 });
 
-// --- Toggle password visibility ---
+// Toggle password visibility
 function setupPasswordToggle(inputId, toggleIconId) {
     const passwordInput = document.getElementById(inputId);
     const toggleIcon = document.getElementById(toggleIconId);
@@ -40,15 +40,13 @@ function setupPasswordToggle(inputId, toggleIconId) {
 setupPasswordToggle('login-password', 'toggle-login-password');
 setupPasswordToggle('register-password', 'toggle-register-password');
 
-// --- Login section ---
+// Login section
 const loginForm = document.getElementById('login-form');
 
 loginForm.addEventListener('submit', async (e) => {
     e.preventDefault();
-
     const email = document.getElementById('login-email').value;
     const password = document.getElementById('login-password').value;
-
     try {
         const response = await fetch('/api/login', {
             method: 'POST',
@@ -59,7 +57,6 @@ loginForm.addEventListener('submit', async (e) => {
         });
 
         const data = await response.json();
-
         if (response.ok) {
             if (data.role === 'admin') {
                 window.location.href = '/admin/dashboard';

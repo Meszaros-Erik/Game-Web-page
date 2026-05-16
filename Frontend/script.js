@@ -1,37 +1,4 @@
-// Instantly Check Dark Mode
-if (localStorage.getItem('darkMode') === 'enabled') {
-    document.body.classList.add('dark-mode');
-}
-
 document.addEventListener("DOMContentLoaded", () => {
-
-    // Dark mode toggle functionality
-    const toggleIcon = document.querySelector('.toggle-icon');
-
-    if (toggleIcon) {
-        if (localStorage.getItem('darkMode') === 'enabled') {
-            toggleIcon.classList.remove('bx-moon');
-            toggleIcon.classList.add('bx-sun');
-        } else {
-            toggleIcon.classList.remove('bx-sun');
-            toggleIcon.classList.add('bx-moon');
-        }
-
-        toggleIcon.addEventListener('click', () => {
-            document.body.classList.toggle('dark-mode');
-            
-            if (document.body.classList.contains('dark-mode')) {
-                localStorage.setItem('darkMode', 'enabled');
-                toggleIcon.classList.remove('bx-moon');
-                toggleIcon.classList.add('bx-sun');
-            } else {
-                localStorage.setItem('darkMode', 'disabled');
-                toggleIcon.classList.remove('bx-sun');
-                toggleIcon.classList.add('bx-moon');
-            }
-        });
-    }
-
     // Scroll
     const liLinks = document.querySelectorAll("header .navbar a");
     const sections = document.querySelectorAll("section");
@@ -59,7 +26,6 @@ document.addEventListener("DOMContentLoaded", () => {
     const menuIcon = document.getElementById("menu-btn"); 
     const navbar = document.querySelector(".navbar"); 
     const toggler = document.getElementById("toggler"); 
-
     if (menuIcon && navbar && toggler) {
         toggler.addEventListener("change", () => {
             if (toggler.checked) {
@@ -74,17 +40,14 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 
-
     // Contact form handling (POST request)
     const form = document.querySelector('form');
-    
     if (form) {
         const fullName = document.getElementById('name');
         const email = document.getElementById('email');
         const phone = document.getElementById('phone');
         const subject = document.getElementById('subject');
         const mess = document.getElementById('message');
-
         function sendEmail() {
             const formData = {
                 name: fullName.value,
@@ -130,7 +93,6 @@ document.addEventListener("DOMContentLoaded", () => {
         function checkInputs() {
             const items = document.querySelectorAll('.item');
             let hasError = false;
-
             for (const item of items) {
                 item.parentElement.classList.remove('error');
                 if (item.value.trim() == '') {
@@ -138,7 +100,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     hasError = true;
                 }
             }
-
             if (email && email.value != '') {
                 if (checkEmail()) {
                     hasError = true;
@@ -152,9 +113,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const emailParent = email.parentElement;
             const errorTxt = emailParent.querySelector('.error-text');
             let isInvalid = false;
-
             emailParent.classList.remove('error');
-
             if (email.value == "") {
                 emailParent.classList.add('error');
                 if (errorTxt) errorTxt.innerText = "Email Address can't be blank";
