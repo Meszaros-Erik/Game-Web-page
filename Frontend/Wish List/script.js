@@ -5,18 +5,14 @@ document.addEventListener('DOMContentLoaded', () => {
 function renderWishlist() {
     const wishlistGrid = document.getElementById('wishlist-grid');
     const emptyMessage = document.getElementById('empty-wishlist-message');
-    
     let wishlist = JSON.parse(localStorage.getItem('gameWishlist')) || [];
-
     if (wishlist.length === 0) {
         emptyMessage.style.display = 'block';
         wishlistGrid.style.display = 'none';
     } else {
         emptyMessage.style.display = 'none';
         wishlistGrid.style.display = 'grid';
-        
         wishlistGrid.innerHTML = '';
-
         wishlist.forEach(game => {
             const card = document.createElement('div');
             card.classList.add('wishlist-card');
@@ -45,6 +41,5 @@ function removeFromWishlist(gameId) {
     let wishlist = JSON.parse(localStorage.getItem('gameWishlist')) || [];
     wishlist = wishlist.filter(game => game.id !== gameId);
     localStorage.setItem('gameWishlist', JSON.stringify(wishlist));
-    
     renderWishlist();
 }
