@@ -25,8 +25,10 @@ function getLocalIP() {
 }
 
 // --- Import Routes ---
-const contactRoutes = require('./routes/contact');
+const usersRoutes = require('./routes/users');
+const gamesRoutes = require('./routes/games');
 const scoresRoutes = require('./routes/scores');
+const contactRoutes = require('./routes/contact');
 const authRoutes = require('./routes/auth');
 
 app.get('/', (req, res) => {
@@ -34,8 +36,10 @@ app.get('/', (req, res) => {
 });
 
 // Connecting endpoints to files
-app.use('/api/contact', contactRoutes);
+app.use('/api/users', usersRoutes);
+app.use('/api/games', gamesRoutes);
 app.use('/api/scores', scoresRoutes);
+app.use('/api/contact', contactRoutes);
 app.use('/api/auth', authRoutes);
 
 // --- Server Starter ---

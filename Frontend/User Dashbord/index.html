@@ -5,7 +5,7 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
-        <link rel="website icon" type="png" href="image/logo.png">     
+        <link rel="website icon" type="png" href="../image/logo.png">     
         <title>User Dashboard</title>
 
         <!-- CSS file link -->
@@ -16,7 +16,7 @@
         <header class="header">
             <input type="checkbox" name="" id="toggler">
             <div class="bx bx-menu" id="menu-btn"></div>
-            <a href="#" class="logo"><img src="../image/logo.png">Hello <span>...!</span></a>
+            <a href="/index.html" class="logo"><img src="../image/logo.png">Hello <span>User!</span></a>
             <nav class="navbar">
                 <a href="#scores" style="--i:1;">Scores List</a>
                 <a href="#favorites" style="--i:2;">Favorites Games</a>
@@ -29,9 +29,38 @@
             </div>  
         </header>
 
-        
+        <!-- Scores Section -->
+        <section class="user-section" id="scores">
+            <h2 class="section-title"><i class='bx bx-trophy'></i> User Scores</h2>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>ID</th>
+                            <th>User ID</th>
+                            <th>Username</th>
+                            <th>Game Title</th>
+                            <th>Score</th>
+                            <th>Achieved At</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scoresTableBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Favorites Games Section -->
+        <section class="user-section" id="games">
+            <h2 class="section-title"><i class='bx bx-game'></i> Favorites Games</h2>
+            <div class="table-container">
+            
+            </div>
+        </section>
+
+        <div id="toast-container"></div>
 
         <script src="script.js"></script>
-        <script src="../CSS & Js code path/Dark-Mode.js"></script>
+        <script src="../CSS & Js code path/global functions.js"></script>
     </body>
 </html>
