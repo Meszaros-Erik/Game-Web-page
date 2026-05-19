@@ -91,5 +91,24 @@ h1 {
     background: var(--accent);
     color: white;
 }
-
 .btn:active { transform: scale(0.96); }
+
+.difficulty-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.btn-diff {
+    background: #f1f5f9;
+    color: var(--text-muted);
+    border: 1px solid #cbd5e1;
+    font-size: 0.9rem;
+}
+
+.btn-diff.active {
+    background: var(--accent);
+    color: white;
+    border-color: var(--accent);
+}

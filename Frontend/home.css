@@ -1,64 +1,3 @@
-/* --- Navbar Section --- */
-header .navbar {
-    margin-right: 12rem;
-}
-
-header .navbar a {
-    display: inline-block;
-    font-size: 1.8rem;
-    color: var(--text-dark);
-    font-weight: 500;
-    margin: 0 2rem;
-    transition: .3s;
-    opacity: 0;
-    animation: slideTop .5s ease forwards;
-    animation-delay: calc(.2s * var(--i));
-}
-header .navbar a:hover,
-header .navbar a.active {
-    color: var(--main-color);
-}
-
-/* Home Section Default Settings & Main Btn */
-section {
-    padding: 5rem 9%;
-}
-
-.heading {
-    text-align: center;
-    font-size: 4rem;
-    color: var(--text-dark);
-    padding: 1rem;
-    margin: 2rem 0;
-    background: rgba(23, 67, 227, 0.05);
-}
-
-.heading span {
-    color: var(--main-color);
-}
-
-.btn {
-    display: inline-block;
-    padding: 1rem 2.8rem;
-    background: var(--main-color);
-    border: .2rem solid var(--main-color);
-    border-radius: .6rem;
-    box-shadow: 0 0 1rem rgba(0, 0, 0, .1);
-    font-size: 1.6rem;
-    color: var(--bg-color);
-    letter-spacing: .1rem;
-    font-weight: 600;
-    transition: .5s;
-    opacity: 0;
-    animation: slideTop 1s ease forwards;
-    animation-delay: 2s;
-    cursor: pointer;
-}
-.btn:hover {
-    background: transparent;
-    color: var(--main-color);
-}
-
 /* --- Home Section --- */
 .home {
     position: relative;
@@ -172,8 +111,7 @@ section {
     text-align: center;
     font-size: 4rem;
     color: var(--text-dark);
-    padding: 1rem;
-    margin: 2rem 0;
+    padding: 1rem; margin: 2rem 0;
     background: rgba(23, 67, 227, 0.05);
 }
 
@@ -271,6 +209,25 @@ section {
 
 .games .box-container .box:hover .image .icons {
     bottom: 0;
+}
+
+.games .box-container .box .image .icons .like-btn {
+    height: 5rem;
+    line-height: 5rem;
+    font-size: 2.5rem;
+    width: 50%;
+    background: var(--main-color);
+    color: var(--white);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: block;
+}
+.games .box-container .box .image .icons .like-btn:hover {
+    background: var(--text-dark);
+}
+
+.games .box-container .box .image .icons .like-btn.liked {
+    color: var( --heart-color);
 }
 
 .games .box-container .box .image .icons a {

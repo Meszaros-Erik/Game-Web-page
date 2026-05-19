@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+        <link rel="website icon" type="png" href="../image/logo.png">     
+        <title>Admin Dashboard</title>
+
+        <!-- CSS file link -->
+        <link rel="stylesheet" href="../CSS & Js code path/global.css">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <header class="header">
+            <input type="checkbox" name="" id="toggler">
+            <div class="bx bx-menu" id="menu-btn"></div>
+            <a href="#" class="logo"><img src="../image/logo.png">Hello <span>Admin!</span></a>
+            <nav class="navbar">
+                <a href="#users" style="--i:1;">User List</a>
+                <a href="#games" style="--i:2;">Games List</a>
+                <a href="#scores" style="--i:3;">Users Scores</a>
+                <a href="#contact" style="--i:4;">Contact Me</a>
+            </nav>
+
+            <div class="header-icons">
+                <div class="toggle" id="darkModeBtn">
+                    <i class="bx bx-moon toggle-icon"></i>
+                </div>
+            </div>  
+        </header>
+
+        <!-- Users Section -->
+        <section class="admin-section" id="users">
+            <h2 class="section-title"><i class='bx bx-user'></i> Users List</h2>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>ID</th>
+                            <th>Username</th>
+                            <th>Email</th>
+                            <th>Role</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usersTableBody"></tbody>
+                </table>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-modify" id="modifyUserBtn"><i class='bx bx-edit-alt'></i> Modify Role</button>
+                <button class="btn btn-delete" id="deleteUserBtn"><i class='bx bx-trash'></i> Delete User</button>
+            </div>
+        </section>
+
+        <!-- Games Section -->
+        <section class="admin-section" id="games">
+            <h2 class="section-title"><i class='bx bx-game'></i> Games List</h2>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>ID</th>
+                            <th>Title</th>
+                            <th>Category</th>
+                            <th>Min Players</th>
+                            <th>Status</th>
+                            <th>Clicks</th>
+                            <th>Image Link</th>
+                            <th>Game Link</th>
+                            <th>Description</th>
+                        </tr>
+                    </thead>
+                    <tbody id="gamesTableBody"></tbody>
+                </table>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-add" id="addGameBtn"><i class='bx bx-plus-circle'></i> Add Game</button>
+                <button class="btn btn-modify" id="modifyGameBtn"><i class='bx bx-edit-alt'></i> Modify Game</button>
+                <button class="btn btn-delete" id="deleteGameBtn"><i class='bx bx-trash'></i> Delete Game</button>
+            </div>
+        </section>
+
+        <!-- Scores Section -->
+        <section class="admin-section" id="scores">
+            <h2 class="section-title"><i class='bx bx-trophy'></i> Users Scores</h2>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>ID</th>
+                            <th>User ID</th>
+                            <th>Username</th>
+                            <th>Game Title</th>
+                            <th>Score</th>
+                            <th>Achieved At</th>
+                        </tr>
+                    </thead>
+                    <tbody id="scoresTableBody"></tbody>
+                </table>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-add" id="addScoreBtn"><i class='bx bx-plus-circle'></i> Add Score</button>
+                <button class="btn btn-modify" id="modifyScoreBtn"><i class='bx bx-edit-alt'></i> Modify Score</button>
+                <button class="btn btn-delete" id="deleteScoreBtn"><i class='bx bx-trash'></i> Delete Score</button>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section class="admin-section" id="contact">
+            <h2 class="section-title"><i class='bx bx-envelope'></i> Contact Messages</h2>
+            <div class="table-container">
+                <table class="data-table">
+                    <thead>
+                        <tr>
+                            <th>Select</th>
+                            <th>ID</th>
+                            <th>Name</th>
+                            <th>Email</th>
+                            <th>Phone</th>
+                            <th>Subject</th>
+                            <th>Message</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="contactTableBody"></tbody>
+                </table>
+            </div>
+            <div class="action-buttons">
+                <button class="btn btn-delete" id="deleteContactBtn"><i class='bx bx-trash'></i> Delete Message</button>
+            </div>
+        </section>
+
+        <div id="roleModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3>Modify User Role</h3>
+                    <span class="close-btn" id="closeRoleModal">&times;</span>
+                </div>
+                <form id="modifyRoleForm">
+                    <input type="hidden" id="modalUserId">
+                    <div class="input-group">
+                        <label for="modalUserRole">Select New Role:</label>
+                        <select id="modalUserRole" required>
+                            <option value="1">Admin (1)</option>
+                            <option value="2">Sima User (2)</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-save">Save Role</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="gameModal" class="modal">
+            <div class="modal-content" style="max-width: 500px;">
+                <div class="modal-header">
+                    <h3 id="gameModalTitle">Add New Game</h3>
+                    <span class="close-btn" id="closeGameModal">&times;</span>
+                </div>
+                <form id="gameForm">
+                    <input type="hidden" id="gameId">
+                    <div class="input-group">
+                        <label>Game Title:</label>
+                        <input type="text" id="gameTitle" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Category:</label>
+                        <input type="text" id="gameCategory" placeholder="e.g. Arcade, Puzzle" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Min Players:</label>
+                        <input type="number" id="gameMinPlayers" min="1" value="1" required>
+                    </div>
+                    <div class="input-group">
+                        <label>Status:</label>
+                        <select id="gameIsActive">
+                            <option value="1">Active</option>
+                            <option value="0">Inactive</option>
+                        </select>
+                    </div>
+                    <div class="input-group">
+                        <label>Image Path:</label>
+                        <input type="text" id="gameImageUrl" placeholder="image/game.png">
+                    </div>
+                    <div class="input-group">
+                        <label>Game Link:</label>
+                        <input type="text" id="gameLink" placeholder="games/game/index.html">
+                    </div>
+                    <div class="input-group">
+                        <label>Description:</label>
+                        <textarea id="gameDescription" rows="3" style="resize: none;"></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-save">Save Game</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="toast-container"></div>
+
+        <script src="script.js"></script>
+        <script src="../CSS & Js code path/global functions.js"></script>
+    </body>
+</html>

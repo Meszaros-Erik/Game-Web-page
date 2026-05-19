@@ -2,6 +2,40 @@ const grid = document.getElementById("grid");
 let lockGame = false;
 let flagMode = false;
 
+// Timer variables
+let timerInterval = null;
+let timeElapsed = 0;
+let firstClick = true;
+
+// Time formatting function (MM:SS)
+function formatTime(totalSeconds) {
+    const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
+    const seconds = String(totalSeconds % 60).padStart(2, '0');
+    return `${minutes}:${seconds}`;
+}
+
+// Timer functions
+function startTimer() {
+    if (timerInterval) clearInterval(timerInterval);
+    timerInterval = setInterval(() => {
+        timeElapsed++;
+        document.getElementById('timer').innerText = `Time: ${formatTime(timeElapsed)}`;
+    }, 1000);
+}
+
+function stopTimer() {
+    clearInterval(timerInterval);
+}
+
+function resetTimer() {
+    stopTimer();
+    timeElapsed = 0;
+    const timerElement = document.getElementById('timer');
+    if (timerElement) {
+        timerElement.innerText = `Time: 00:00`;
+    }
+}
+
 // Set test mode to true if you want see mines location
 const testMode = false;
 generateGrid();
@@ -16,12 +50,16 @@ function toggleMode() {
 function generateGrid() {
     lockGame = false;
     flagMode = false;
+
+    firstClick = true;
+    resetTimer();
+
     document.getElementById("mode-btn").innerHTML = "Mode: Reveal";
     grid.innerHTML = "";
     for (var i = 0; i < 10; i++) {
-        row = grid.insertRow(i);
+        var row = grid.insertRow(i);
         for (var j = 0; j < 10; j++) {
-            cell = row.insertCell(j);
+            var cell = row.insertCell(j);
             cell.onclick = function () { init(this); };
             var mine = document.createAttribute("mine");
             mine.value = "false";
@@ -47,6 +85,8 @@ function generateMines() {
 
 // Highlight all mines red
 function revealMines() {
+    stopTimer();
+
     let delay = 0;
     for (var i = 0; i < 10; i++) {
         for (var j = 0; j < 10; j++) {
@@ -80,13 +120,19 @@ function checkGameComplete() {
         }
     }
     if (gameComplete) {
-        alert("You Found All Mines!");
+        stopTimer();
+        alert(`You Found All Mines in ${formatTime(timeElapsed)}!`);
         revealMines();
     }
 }
 
 function init(cell) {
     if (lockGame) return;
+
+    if (firstClick) {
+        startTimer();
+        firstClick = false;
+    }
 
     if (flagMode) {
         if (cell.classList.contains("active")) return;

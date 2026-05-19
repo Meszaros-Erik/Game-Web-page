@@ -12,12 +12,12 @@
     <body>
         <div class="container" id="container">
             <div class="form-container sign-up">
-                <form>
+                <form id="register-form"> 
                     <h1>Create Account</h1>
-                    <br></br>
-                    <span>Or use your email for registeration</span>
-                    <input type="text" placeholder="Name">
-                    <input type="email" placeholder="Email">
+                    <br>
+                    <span>Or use your email for registration</span>
+                    <input type="text" id="register-name" placeholder="Name" required>
+                    <input type="email" id="register-email" placeholder="Email" required>
                     <div class="password-input-container">
                         <input type="password" id="register-password" placeholder="Password" required>
                         <i class='bx bx-hide eye-icon' id="toggle-register-password"></i>
@@ -29,11 +29,11 @@
             </div>
 
             <div class="form-container sign-in">
-                <form>
+                <form id="login-form"> 
                     <h1>Sign In</h1>
                     <br>
                     <span>Or use your email password</span>
-                    <input type="email" placeholder="Email">
+                    <input type="email" id="login-email" placeholder="Email" required>
                     <div class="password-input-container">
                         <input type="password" id="login-password" placeholder="Password" required>
                         <i class='bx bx-hide eye-icon' id="toggle-login-password"></i>
@@ -43,6 +43,7 @@
                     <span class="mobile-toggle" id="to-register-mobile">Don't have an account? <b>Sign Up</b></span>
                 </form>
             </div>
+
             <div class="toggle-container">
                 <div class="toggle">
                     <div class="toggle-panel toggle-left">
@@ -58,6 +59,8 @@
                 </div>
             </div>
         </div>
+
+        <div id="toast-container"></div>
 
         <script src="script.js"></script>
     </body>

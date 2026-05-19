@@ -20,7 +20,9 @@
   },
   "homepage": "https://github.com/Meszaros-Erik/G-Web#readme",
   "dependencies": {
+    "bcrypt": "^6.0.0",
     "express": "^5.2.1",
+    "mysql2": "^3.22.3",
     "nodemailer": "^8.0.5"
   }
 }

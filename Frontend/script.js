@@ -1,44 +1,20 @@
 document.addEventListener("DOMContentLoaded", () => {
-    // Scroll
-    const liLinks = document.querySelectorAll("header .navbar a");
-    const sections = document.querySelectorAll("section");
 
-    if (liLinks.length > 0 && sections.length > 0) {
-        function activeMenu() {
-            let secLength = sections.length;
-            while (--secLength && window.scrollY + 500 < sections[secLength].offsetTop) {}
-            liLinks.forEach((link, index) => {
-                if (index === secLength) {
-                    link.classList.add("active");
-                } else {
-                    link.classList.remove("active");
-                }
-            });
-        }
-        let debounceTimeout;
-        window.addEventListener("scroll", () => {
-            clearTimeout(debounceTimeout); 
-            debounceTimeout = setTimeout(activeMenu, 50); 
-        });
-    }
+    // Whislist btn logic
+    const likeButtons = document.querySelectorAll('.like-btn');
+    likeButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
 
-    // Mobil Menu Open/Close
-    const menuIcon = document.getElementById("menu-btn"); 
-    const navbar = document.querySelector(".navbar"); 
-    const toggler = document.getElementById("toggler"); 
-    if (menuIcon && navbar && toggler) {
-        toggler.addEventListener("change", () => {
-            if (toggler.checked) {
-                navbar.classList.add("open"); 
-            } else {
-                navbar.classList.remove("open"); 
+            this.classList.toggle('bx-heart');
+            this.classList.toggle('bxs-heart');
+            this.classList.toggle('liked');
+
+            if (this.classList.contains('liked')) {
+                showToast("Added to favorites!");
             }
         });
-
-        menuIcon.addEventListener("click", () => {
-            toggler.checked = !toggler.checked;
-        });
-    }
+    });
 
     // Contact form handling (POST request)
     const form = document.querySelector('form');
@@ -57,12 +33,12 @@ document.addEventListener("DOMContentLoaded", () => {
                 message: mess.value
             };
 
-            fetch('/contact', {
+            fetch('/api/contact', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(formData)
+                body: JSON.stringify({ name: formData.name, email: formData.email, phone: formData.phone, subject: formData.subject, message: formData.message })
             })
             .then(response => response.json())
             .then(data => {
