@@ -32,6 +32,24 @@ body {
     background-color: var(--white);
     -webkit-overflow-scrolling: touch; 
 }
+.table-container::-webkit-scrollbar {
+    height: 10px;
+}
+
+.table-container::-webkit-scrollbar-track {
+    background: var(--bg-color); 
+    border-radius: 0 0 8px 8px;
+}
+
+.table-container::-webkit-scrollbar-thumb {
+    background: var(--main-color); 
+    border-radius: 8px;
+    border: 2px solid var(--bg-color);
+}
+.table-container::-webkit-scrollbar-thumb:hover {
+    background: var(--text-dark); 
+    cursor: pointer;
+}
 
 .data-table {
     width: 100%;
@@ -53,7 +71,6 @@ body {
     color: var(--text-dark);
     font-weight: 600;
 }
-
 .data-table tr:hover {
     background-color: var(--toggle-bg-highlight);
 }

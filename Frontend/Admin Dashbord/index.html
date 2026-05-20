@@ -103,7 +103,6 @@
                 </table>
             </div>
             <div class="action-buttons">
-                <button class="btn btn-add" id="addScoreBtn"><i class='bx bx-plus-circle'></i> Add Score</button>
                 <button class="btn btn-modify" id="modifyScoreBtn"><i class='bx bx-edit-alt'></i> Modify Score</button>
                 <button class="btn btn-delete" id="deleteScoreBtn"><i class='bx bx-trash'></i> Delete Score</button>
             </div>
@@ -146,7 +145,7 @@
                         <label for="modalUserRole">Select New Role:</label>
                         <select id="modalUserRole" required>
                             <option value="1">Admin (1)</option>
-                            <option value="2">Sima User (2)</option>
+                            <option value="2">User (2)</option>
                         </select>
                     </div>
                     <button type="submit" class="btn btn-save">Save Role</button>
@@ -181,13 +180,19 @@
                             <option value="0">Inactive</option>
                         </select>
                     </div>
-                    <div class="input-group">
+                    <div class="input-group" style="display: flex; gap: 10px; align-items: center;">
                         <label>Image Path:</label>
-                        <input type="text" id="gameImageUrl" placeholder="image/game.png">
+                        <input type="text" id="gameImageUrl" placeholder="game.png">
+                        
+                        <button type="button" onclick="document.getElementById('imageFileInput').click()" title="Image Browsing" style="cursor: pointer; padding: 5px 10px;">
+                            <i class="bx bx-folder-plus"></i>
+                        </button>
+                        <input type="file" id="imageFileInput" style="display: none;" accept="image/*">
                     </div>
+
                     <div class="input-group">
                         <label>Game Link:</label>
-                        <input type="text" id="gameLink" placeholder="games/game/index.html">
+                        <input type="text" id="gameLink" placeholder="Pl.: Web Games/Game Name/index.html">
                     </div>
                     <div class="input-group">
                         <label>Description:</label>
@@ -198,6 +203,40 @@
             </div>
         </div>
 
+        <div id="scoreModal" class="modal">
+            <div class="modal-content" style="max-width: 500px;">
+                <div class="modal-header">
+                    <h3 id="scoreModalTitle">Modify Score</h3>
+                    <span class="close-btn" id="closeScoreModal">&times;</span>
+                </div>
+                <form id="scoreForm">
+                    <input type="hidden" id="scoreId">
+                    
+                    <div class="input-group">
+                        <label>User ID:</label>
+                        <input type="number" id="scoreUserId" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Username:</label>
+                        <input type="text" id="scoreUsername" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Game Title:</label>
+                        <input type="text" id="scoreGameTitle" required>
+                    </div>
+                    
+                    <div class="input-group">
+                        <label>Score:</label>
+                        <input type="number" id="scoreValue" required>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-save">Save Score</button>
+                </form>
+            </div>
+        </div>
+        
         <div id="toast-container"></div>
 
         <script src="script.js"></script>

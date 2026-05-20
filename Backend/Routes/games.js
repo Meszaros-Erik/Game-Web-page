@@ -19,4 +19,24 @@ router.delete('/:id', async (req, res) => {
     res.status(200).json({ success: true, message: "Game deleted successfully!" });
 });
 
+router.put('/:id', async (req, res) => {
+    const { id } = req.params;
+    const { title, category, min_players, status, image_link, game_link, description } = req.body;
+    
+    try {
+        const sql = `UPDATE games SET title = ?, category = ?, min_players = ?, status = ?, image_link = ?, game_link = ?, description = ? WHERE id = ?`;
+        
+        const [result] = await pool.query(sql, [title, category, min_players, status, image_link, game_link, description, id]);
+        
+        if (result.affectedRows === 0) {
+            return res.status(404).json({ success: false, message: "Game not found!" });
+        }
+        
+        res.status(200).json({ success: true, message: "Game updated successfully!" });
+    } catch (error) {
+        console.error("❌ Error updating game:", error);
+        res.status(500).json({ success: false, message: "Server error while updating the game." });
+    }
+});
+
 module.exports = router;
