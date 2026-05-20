@@ -76,7 +76,7 @@ body {
 header {
     position: fixed;
     top: 0; left: 0; width: 100%;
-    padding: 2rem 8%;
+    padding: 2rem 2%;
     background: var(--white);
     display: flex;
     justify-content: space-between;
@@ -110,7 +110,8 @@ header .logo span {
 }
 
 header .navbar {
-    margin-right: 12rem;
+    margin-left: auto;
+    margin-right: 1.5rem;
 }
 
 header .navbar a {
@@ -131,12 +132,9 @@ header .navbar a.active {
 
 /* Header icons & mobile menu btn */
 .header-icons {
-    position: absolute;
-    right: 2.2rem; top: 50%;
-    transform: translateY(-50%);
     display: flex;
     align-items: center;
-    gap: 1.5rem;
+    gap: 2.5rem;
 }
 
 header #toggler {
@@ -260,6 +258,94 @@ header .bx-menu {
     animation: slideOutToast 0.4s ease forwards;
 }
 
+/* --- Profile and Dropdown Menu --- */
+.auth-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.user-profile {
+    position: relative;
+    display: inline-block;
+}
+
+.profile-trigger {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    cursor: pointer;
+    padding: 8px 18px;
+    border-radius: 30px;
+    transition: all 0.3s ease;
+    border: 1px solid transparent;
+}
+.profile-trigger:hover {
+    background: var(--bg-color);
+    border: 1px solid rgba(0,0,0,0.05);
+}
+
+.profile-img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--main-color);
+}
+
+.profile-name {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.profile-trigger i {
+    font-size: 2rem;
+    color: var(--text-dark);
+}
+
+.dropdown-menu {
+    position: absolute;
+    top: 120%; right: 5px;
+    background: var(--white);
+    border-radius: 8px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    width: 180px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s ease;
+    z-index: 1000;
+}
+
+.dropdown-menu.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.dropdown-menu a {
+    padding: 12px 20px;
+    font-size: 1.4rem;
+    color: var(--text-dark);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    transition: background 0.3s;
+    text-decoration: none;
+}
+
+.dropdown-menu a i {
+    font-size: 1.8rem;
+}
+.dropdown-menu a:hover {
+    background: var(--bg-color);
+    color: var(--main-color);
+}
+
 /* --- Media Queries --- */
 @media(max-width: 991px){
     html { font-size: 55%; }
@@ -281,6 +367,21 @@ header .bx-menu {
         padding: 0.5rem 1rem;
         border-width: 1px;
     }
+
+    .profile-name, 
+    .profile-trigger .bx-chevron-down { display: none !important; }
+
+    .profile-trigger {
+        padding: 0; gap: 0;
+        border: none;
+    }
+
+    .profile-trigger:hover {
+        background: transparent;
+        border-color: transparent;
+    }
+
+    .dropdown-menu { top: 140%; right: -10px; }
 }
 
 @media(max-width: 450px){

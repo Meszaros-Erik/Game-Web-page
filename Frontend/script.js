@@ -1,21 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
 
-    // Whislist btn logic
-    const likeButtons = document.querySelectorAll('.like-btn');
-    likeButtons.forEach(button => {
-        button.addEventListener('click', function(e) {
-            e.preventDefault();
-
-            this.classList.toggle('bx-heart');
-            this.classList.toggle('bxs-heart');
-            this.classList.toggle('liked');
-
-            if (this.classList.contains('liked')) {
-                showToast("Added to favorites!");
-            }
-        });
-    });
-
     // Contact form handling (POST request)
     const form = document.querySelector('form');
     if (form) {

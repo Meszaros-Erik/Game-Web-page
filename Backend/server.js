@@ -29,6 +29,7 @@ const usersRoutes = require('./routes/users');
 const gamesRoutes = require('./routes/games');
 const scoresRoutes = require('./routes/scores');
 const contactRoutes = require('./routes/contact');
+const favorites = require('./routes/favorites');
 const authRoutes = require('./routes/auth');
 
 app.get('/', (req, res) => {
@@ -40,6 +41,7 @@ app.use('/api/users', usersRoutes);
 app.use('/api/games', gamesRoutes);
 app.use('/api/scores', scoresRoutes);
 app.use('/api/contact', contactRoutes);
+app.use('/api/favorites', favorites);
 app.use('/api/auth', authRoutes);
 
 // --- Server Starter ---

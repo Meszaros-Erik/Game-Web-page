@@ -78,8 +78,8 @@ document.addEventListener("DOMContentLoaded", () => {
                     showToast(data.message, 'error');
                 }
             } catch (error) {
-                console.error('Szerver hiba regisztrációkor:', error);
-                showToast('Nem sikerült kapcsolódni a szerverhez!', 'error');
+                console.error('Server error during registration:', error);
+                showToast('Unable to connect to server!', 'error');
             }
         });
     }
@@ -103,14 +103,17 @@ document.addEventListener("DOMContentLoaded", () => {
                 const data = await response.json();
                 
                 if (data.success) {
-                    localStorage.setItem("loggedInUser", JSON.stringify(data.user));
+                    localStorage.setItem("user", JSON.stringify(data.user));
+                
+                    sessionStorage.removeItem('logout_pressed');
+                    
                     showToast(data.message, 'success');
 
                     setTimeout(() => {
                         if (data.user.role === 1) {
-                            window.location.href = '/Admin Dashbord/index.html';
+                            window.location.href = '../Admin Dashbord/index.html';
                         } else {
-                            window.location.href = '/index.html'; 
+                            window.location.href = '../index.html';
                         }
                     }, 1000);
                 } else {

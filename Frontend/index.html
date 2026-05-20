@@ -33,8 +33,21 @@
                         <i class="bx bx-heart toggle-icon"></i>
                     </a>
                 </div>
-                <div class="login">
+                <div id="auth-container" class="auth-container">
                     <a href="../Login & Registration/index.html" class="btn" id="loginBtn">Login</a>
+
+                    <div class="user-profile" id="userProfile" style="display: none;">
+                        <div class="profile-trigger" id="profileTrigger">
+                            <img src="image/Robot-avatar.png" alt="Profile" class="profile-img">
+                            <span class="profile-name" id="profileName">Username</span>
+                            <i class='bx bx-chevron-down'></i>
+                        </div>
+                        
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <a href="#" id="dashboardLink"><i class='bx bx-grid-alt'></i> Dashboard</a>
+                            <a href="#" id="logoutBtn" style="color: var(--error-color);"><i class='bx bx-log-out'></i> Logout</a>
+                        </div>
+                    </div>
                 </div>
             </div>  
         </header>
@@ -140,6 +153,7 @@
 
         <div id="toast-container"></div>
 
+        <!-- JS file link -->
         <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
         <script src="CSS & Js code path/global functions.js"></script>
         <script src="public-games.js"></script>

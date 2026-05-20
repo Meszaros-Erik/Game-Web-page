@@ -80,13 +80,11 @@ function showToast(message, type = 'success') {
     
     const toast = document.createElement('div');
     toast.classList.add('toast');
-    
-    // Típus alapján egyedi osztályt adunk hozzá a CSS-hez
+
     if (type === 'error') toast.classList.add('toast-error');
     if (type === 'warning') toast.classList.add('toast-warning');
 
-    // Kiválasztjuk a megfelelő ikont a Boxicons-ból
-    let icon = "<i class='bx bxs-check-circle'></i>"; // alapértelmezett zöld pipa
+    let icon = "<i class='bx bxs-check-circle'></i>";
     if (type === 'error') icon = "<i class='bx bxs-error-circle'></i>";
     if (type === 'warning') icon = "<i class='bx bxs-attention'></i>";
 
@@ -100,3 +98,58 @@ function showToast(message, type = 'success') {
         });
     }, 3000);
 }
+
+document.addEventListener("DOMContentLoaded", async () => {
+    
+    // User Profile & Menu Logic
+    const loginBtn = document.getElementById('loginBtn');
+    const userProfile = document.getElementById('userProfile');
+    const profileName = document.getElementById('profileName');
+    const dashboardLink = document.getElementById('dashboardLink');
+    const profileTrigger = document.getElementById('profileTrigger');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const logoutBtn = document.getElementById('logoutBtn');
+    
+    const profileImg = document.querySelector('#profileTrigger .profile-img');
+
+    const loggedInUser = JSON.parse(localStorage.getItem('user'));
+
+    if (loggedInUser) {
+        if (loginBtn) loginBtn.style.display = 'none';
+        if (userProfile) userProfile.style.display = 'inline-block';
+        if (profileName) profileName.textContent = loggedInUser.username;
+
+        if (loggedInUser.role === 1) {
+            dashboardLink.href = '/Admin Dashbord/index.html';
+            if (profileImg) profileImg.src = "../image/admin-avatar.png"; 
+        } else {
+            dashboardLink.href = '/User Dashboard/index.html';
+            if (profileImg) profileImg.src = "../image/Robot-avatar.png";
+        }
+    } else {
+        if (loginBtn) loginBtn.style.display = 'inline-block';
+        if (userProfile) userProfile.style.display = 'none';
+    }
+
+    if (profileTrigger) {
+        profileTrigger.addEventListener('click', (e) => {
+            e.stopPropagation();
+            dropdownMenu.classList.toggle('show');
+        });
+    }
+
+    window.addEventListener('click', (e) => {
+        if (dropdownMenu && dropdownMenu.classList.contains('show') && !userProfile.contains(e.target)) {
+            dropdownMenu.classList.remove('show');
+        }
+    });
+
+    if (logoutBtn) {
+        logoutBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            localStorage.removeItem('user');
+            localStorage.removeItem('token');
+            window.location.href = '/index.html'; 
+        });
+    }
+});

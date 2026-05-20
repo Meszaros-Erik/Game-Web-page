@@ -165,7 +165,7 @@ section {
     gap: 2.5rem;
 }
 
-.games .box {
+.games .box-container .box {
     background: var(--white);
     border-radius: .8rem;
     box-shadow: 0 .5rem 1.5rem rgba(0,0,0,.1);
@@ -175,82 +175,80 @@ section {
     border: .1rem solid rgba(0,0,0,.05);
 }
 
-.games .box-container .box {
-    flex: 1 1 30rem;
-    box-shadow: 0 .5rem 1.5rem rgba(0, 0, 0, .1);
-    border-radius: .5rem;
-    border: .1rem solid rgba(0, 0, 0, .1);
-    position: relative;
-    background: var(--white);
-    overflow: hidden;
-}
-
 .games .box-container .box .image {
     text-align: center;
     padding: 0;
     overflow: hidden;
-    height: 35rem; width: 100%;
+    height: 35rem; 
+    width: 100%;
 }
 
 .games .box-container .box .image img {
-    height: 100%; width: 100%;        
+    height: 100%; 
+    width: 100%;        
     object-fit: cover;
-    transition: .3s;
+    transition: .3s ease;
 }
+
 .games .box-container .box:hover .image img {
     transform: scale(1.1);
 }
 
-.games .box-container .box .image .icons {
-    position: absolute;
-    bottom: -7rem; left: 0; right: 0;
-    display: flex;
-}
-
-.games .box-container .box:hover .image .icons {
-    bottom: 0;
-}
-
-.games .box-container .box .image .icons .like-btn {
-    height: 5rem;
-    line-height: 5rem;
-    font-size: 2.5rem;
-    width: 50%;
-    background: var(--main-color);
-    color: var(--white);
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: block;
-}
-.games .box-container .box .image .icons .like-btn:hover {
-    background: var(--text-dark);
-}
-
-.games .box-container .box .image .icons .like-btn.liked {
-    color: var( --heart-color);
-}
-
-.games .box-container .box .image .icons a {
-    height: 5rem;
-    line-height: 5rem;
-    font-size: 2rem;
-    width: 50%;
-    background: var(--main-color);
-    color: var(--white);
-}
-.games .box-container .box .image .icons a:hover {
-    background: var(--text-dark);
-}
-
 .games .box-container .box .content {
-    padding: 4rem 2rem;
+    padding: 2rem;
     text-align: center;
     background: var(--white);
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .games .box-container .box .content h3 {
     font-size: 2.5rem;
     color: var(--text-dark);
+    margin: 0;
+}
+
+.games .box-container .box .content p {
+    color: var(--main-color); 
+    font-size: 1.4rem; 
+    margin-top: 0.5rem;
+}
+
+.games .box-container .box .icons {
+    display: flex;
+    width: 100%;
+    background: var(--main-color);
+}
+
+.games .box-container .box .icons .like-btn,
+.games .box-container .box .icons a {
+    flex: 1; 
+    height: 5rem;
+    line-height: 5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--white);
+    transition: all 0.3s ease;
+    text-decoration: none;
+}
+
+.games .box-container .box .icons .like-btn {
+    font-size: 2.5rem;
+    cursor: pointer;
+}
+
+.games .box-container .box .icons .like-btn.liked {
+    color: var(--heart-color);
+}
+.games .box-container .box .icons a {
+    font-size: 2rem;
+}
+.games .box-container .box .icons .like-btn:hover,
+.games .box-container .box .icons a:hover {
+    background: var(--text-dark);
 }
 
 /* --- Contact Section --- */

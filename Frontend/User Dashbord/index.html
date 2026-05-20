@@ -26,6 +26,22 @@
                 <div class="toggle" id="darkModeBtn">
                     <i class="bx bx-moon toggle-icon"></i>
                 </div>
+
+                <div id="auth-container" class="auth-container">
+                    <a href="../Login & Registration/index.html" class="btn" id="loginBtn">Login</a>
+
+                    <div class="user-profile" id="userProfile" style="display: none;">
+                        <div class="profile-trigger" id="profileTrigger">
+                            <img src="image/default-avatar.png" alt="Profile" class="profile-img">
+                            <span class="profile-name" id="profileName">Username</span>
+                            <i class='bx bx-chevron-down'></i>
+                        </div>
+                        
+                        <div class="dropdown-menu" id="dropdownMenu">
+                            <a href="#" id="logoutBtn" style="color: var(--error-color);"><i class='bx bx-log-out'></i> Logout</a>
+                        </div>
+                    </div>
+                </div>
             </div>  
         </header>
 
@@ -60,6 +76,7 @@
 
         <div id="toast-container"></div>
 
+        <!-- JS file link -->
         <script src="script.js"></script>
         <script src="../CSS & Js code path/global functions.js"></script>
     </body>

@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    
+    if (!user || user.role !== 1) {
+        window.location.href = '/index.html';
+        return;
+    }
+    
     async function loadUsers() {
         const tbody = document.getElementById("usersTableBody");
         if (!tbody) return;
