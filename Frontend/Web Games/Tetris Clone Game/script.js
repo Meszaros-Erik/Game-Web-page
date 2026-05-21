@@ -33,6 +33,31 @@ let touchStartX = 0;
 let touchStartY = 0;
 let threshold = 30;
 
+// --- Server backup ---
+async function saveGameResult(gameTitle, score, level) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) return;
+
+    const data = {
+        user_id: user.id,
+        username: user.username,
+        game_title: gameTitle,
+        score: score,
+        level: "Level " + level,
+        duration: "00:00",
+        rank: 0
+    };
+
+    try {
+        await fetch('/api/scores', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        console.log("Tetris result saved!");
+    } catch (err) { console.error("Error while saving result:", err); }
+}
+
 function setup() {
     let canvas = createCanvas(600, 540);
     canvas.mousePressed(() => false);
@@ -243,7 +268,11 @@ class PlayPiece {
             for (let p of this.pieces) p.pos.y += amount;
             this.fallen = true;
         } else {
-            if (!this.fallen) { gameOver = true; pauseGame = true; }
+            if (!this.fallen) { 
+                gameOver = true; 
+                pauseGame = true;
+                saveGameResult("Tetris", currentScore, currentLevel);
+            }
             else this.commitShape();
         }
     }

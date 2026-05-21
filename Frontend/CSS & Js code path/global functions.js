@@ -105,13 +105,7 @@ document.addEventListener("DOMContentLoaded", async () => {
     const loginBtn = document.getElementById('loginBtn');
     const userProfile = document.getElementById('userProfile');
     const profileName = document.getElementById('profileName');
-    const dashboardLink = document.getElementById('dashboardLink');
-    const profileTrigger = document.getElementById('profileTrigger');
-    const dropdownMenu = document.getElementById('dropdownMenu');
-    const logoutBtn = document.getElementById('logoutBtn');
-    
     const profileImg = document.querySelector('#profileTrigger .profile-img');
-
     const loggedInUser = JSON.parse(localStorage.getItem('user'));
 
     if (loggedInUser) {
@@ -119,12 +113,20 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (userProfile) userProfile.style.display = 'inline-block';
         if (profileName) profileName.textContent = loggedInUser.username;
 
-        if (loggedInUser.role === 1) {
-            dashboardLink.href = '/Admin Dashbord/index.html';
-            if (profileImg) profileImg.src = "../image/admin-avatar.png"; 
-        } else {
-            dashboardLink.href = '/User Dashboard/index.html';
-            if (profileImg) profileImg.src = "../image/Robot-avatar.png";
+        if (profileImg && loggedInUser.profile_picture) {
+            const path = loggedInUser.profile_picture.startsWith('/image/') 
+                         ? loggedInUser.profile_picture 
+                         : '/image/' + loggedInUser.profile_picture;
+            profileImg.src = path + '?t=' + new Date().getTime();
+        }
+
+        const dashLink = document.getElementById('dashboardLink');
+        if (dashLink) {
+            if (loggedInUser.role === 1) {
+                dashLink.href = '/Admin Dashbord/index.html';
+            } else {
+                dashLink.href = '/User Dashbord/index.html';
+            }
         }
     } else {
         if (loginBtn) loginBtn.style.display = 'inline-block';

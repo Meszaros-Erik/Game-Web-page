@@ -1,4 +1,5 @@
 const express = require('express');
+const multer = require('multer');
 const path = require('path');
 const os = require('os');
 
@@ -7,22 +8,23 @@ const PORT = 3500;
 
 // --- MiddLeware ---
 app.use(express.json());
-
 const frontendPath = path.join(__dirname, '..', 'Frontend');
 app.use(express.static(frontendPath));
 
-// --- IP Address retrieval ---
-function getLocalIP() {
-    const interfaces = os.networkInterfaces();
-    for (let name in interfaces) {
-        for (let iface of interfaces[name]) {
-            if (iface.family === 'IPv4' && !iface.internal) {
-                return iface.address;
-            }
-        }
+// --- Upload Logic ---
+const storage = multer.diskStorage({
+    destination: './Frontend/image/', 
+    filename: (req, file, cb) => {
+        const cleanName = file.originalname.replace(/\s+/g, '-');
+        cb(null, cleanName); 
     }
-    return 'localhost';
-}
+});
+const upload = multer({ storage: storage });
+
+app.post('/api/upload-profile-pic', upload.single('profilePic'), (req, res) => {
+    if (!req.file) return res.status(400).json({ message: "No file provided" });
+    res.status(200).json({ fileName: req.file.filename });
+});
 
 // --- Import Routes ---
 const usersRoutes = require('./routes/users');
@@ -45,11 +47,19 @@ app.use('/api/favorites', favorites);
 app.use('/api/auth', authRoutes);
 
 // --- Server Starter ---
-const IP_ADDRESS = getLocalIP();
+function getLocalIP() {
+    const interfaces = os.networkInterfaces();
+    for (let name in interfaces) {
+        for (let iface of interfaces[name]) {
+            if (iface.family === 'IPv4' && !iface.internal) return iface.address;
+        }
+    }
+    return 'localhost';
+}
 
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`🚀 Game Server Online!`);
     console.log(`🏠 Local :   http://localhost:${PORT}`);
-    console.log(`🌐 Network : http://${IP_ADDRESS}:${PORT}`);
+    console.log(`🌐 Network : http://${getLocalIP()}:${PORT}`);
     console.log(`📂 Folder :  ${frontendPath}`);
 });

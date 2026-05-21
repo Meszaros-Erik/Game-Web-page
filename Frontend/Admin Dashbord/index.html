@@ -113,16 +113,18 @@
                             <th>ID</th>
                             <th>User ID</th>
                             <th>Username</th>
-                            <th>Game Title</th>
+                            <th>Game</th>
+                            <th>Level</th>
                             <th>Score</th>
-                            <th>Achieved At</th>
+                            <th>Duration</th>
+                            <th>Rank</th>
+                            <th>Date</th>
                         </tr>
                     </thead>
                     <tbody id="scoresTableBody"></tbody>
                 </table>
             </div>
             <div class="action-buttons">
-                <button class="btn btn-modify" id="modifyScoreBtn"><i class='bx bx-edit-alt'></i> Modify Score</button>
                 <button class="btn btn-delete" id="deleteScoreBtn"><i class='bx bx-trash'></i> Delete Score</button>
             </div>
         </section>
@@ -234,38 +236,6 @@
             </div>
         </div>
 
-        <div id="scoreModal" class="modal">
-            <div class="modal-content" style="max-width: 500px;">
-                <div class="modal-header">
-                    <h3 id="scoreModalTitle">Modify Score</h3>
-                    <span class="close-btn" id="closeScoreModal">&times;</span>
-                </div>
-                <form id="scoreForm">
-                    <input type="hidden" id="scoreId">
-                    
-                    <div class="input-box">
-                        <div class="input-field field">
-                            <input type="number" id="scoreUserId" class="item" placeholder="User ID" readonly>
-                        </div>
-                        <div class="input-field field">
-                            <input type="text" id="scoreUsername" class="item" placeholder="Username" readonly>
-                        </div>
-                    </div>
-
-                    <div class="input-box">
-                        <div class="input-field field">
-                            <input type="text" id="scoreGameTitle" class="item" placeholder="Game Title" required>
-                        </div>
-                        <div class="input-field field">
-                            <input type="number" id="scoreValue" class="item" placeholder="Score" required>
-                        </div>
-                    </div>
-                    
-                    <button type="submit" class="btn btn-save">Save Score</button>
-                </form>
-            </div>
-        </div>
-        
         <div id="toast-container"></div>
 
         <!-- JS file link -->

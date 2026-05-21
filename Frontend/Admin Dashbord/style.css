@@ -197,28 +197,3 @@ body {
 .input-group { margin-bottom: 15px; }
 .input-group label { display: block; font-size: 1.3rem; margin-bottom: 5px; }
 .input-group input { width: 100%; padding: 10px; border: 1px solid var(--bg-color); border-radius: 6px; }
-
-/* --- Media Queries --- */
-@media (max-width: 768px) {
-    header .navbar {
-        position: absolute;
-        top: 100%; 
-        left: 0; right: 0;
-        background: var(--white);
-        border-top: .1rem solid rgba(0, 0, 0, .1);
-        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-        transition: .3s linear;
-    }
-
-    header #toggler:checked ~ .navbar { 
-        clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); 
-    }
-
-    header .navbar a {
-        display: block;
-        margin: 1.5rem;
-        padding: 1.5rem;
-        background: var(--bg-color);
-        opacity: 1;
-    }
-}

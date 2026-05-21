@@ -361,29 +361,6 @@ form .textarea-field .error-text {
 }
 
 @media(max-width: 768px){
-    header .navbar {
-        position: absolute;
-        top: 100%; left: 0; right: 0;
-        background: var(--white);
-        border-top: .1rem solid rgba(0, 0, 0, .1);
-        clip-path: polygon(0 0, 100% 0, 100% 0, 0 0);
-        transition: .3s linear;
-    }
-
-    header #toggler:checked ~ .navbar { clip-path: polygon(0 0, 100% 0, 100% 100%, 0% 100%); }
-
-    header .navbar {
-        margin-right: 0;
-    }
-
-    header .navbar a {
-        margin: 1.5rem;padding: 1.5rem;
-        background: var(--bg-color);
-        display: block;
-        opacity: 1;
-        animation: none;
-    }
-
     .home {
         flex-direction: column-reverse;
         justify-content: center;

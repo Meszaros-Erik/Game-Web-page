@@ -7,6 +7,30 @@ let timerInterval = null;
 let timeElapsed = 0;
 let firstClick = true;
 
+// --- Server backup ---
+async function saveGameResult(gameTitle, score, level, duration) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) return;
+    const data = {
+        user_id: user.id,
+        username: user.username,
+        game_title: gameTitle,
+        score: score,
+        level: level,
+        duration: duration,
+        rank: 0
+    };
+
+    try {
+        await fetch('/api/scores', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        console.log("Minesweeper result saved!");
+    } catch (err) { console.error("Error while saving result:", err); }
+}
+
 // Time formatting function (MM:SS)
 function formatTime(totalSeconds) {
     const minutes = String(Math.floor(totalSeconds / 60)).padStart(2, '0');
@@ -86,7 +110,8 @@ function generateMines() {
 // Highlight all mines red
 function revealMines() {
     stopTimer();
-
+    saveGameResult("Mine Sweeper", 0, "Hard", formatTime(timeElapsed));
+    
     let delay = 0;
     for (var i = 0; i < 10; i++) {
         for (var j = 0; j < 10; j++) {
@@ -121,6 +146,7 @@ function checkGameComplete() {
     }
     if (gameComplete) {
         stopTimer();
+        saveGameResult("Mine Sweeper", 100, "Hard", formatTime(timeElapsed));
         alert(`You Found All Mines in ${formatTime(timeElapsed)}!`);
         revealMines();
     }
@@ -128,7 +154,6 @@ function checkGameComplete() {
 
 function init(cell) {
     if (lockGame) return;
-
     if (firstClick) {
         startTimer();
         firstClick = false;
@@ -148,7 +173,6 @@ function init(cell) {
     }
 
     if (cell.classList.contains("flag")) return;
-
     if (cell.getAttribute("mine") == "true") {
         revealMines();
         lockGame = true;

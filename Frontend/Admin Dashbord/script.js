@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", () => {
     const user = JSON.parse(localStorage.getItem('user'));
     
+    // Auth protection
     if (!user || user.role !== 1) {
         window.location.href = '/index.html';
         return;
@@ -56,18 +57,20 @@ document.addEventListener("DOMContentLoaded", () => {
             const res = await fetch('/api/scores');
             const scores = await res.json();
             tbody.innerHTML = scores.length ? scores.map(s => {
-                const date = new Date(s.achieved_at).toLocaleDateString('en-EN');
                 return `
                     <tr>
                         <td><input type="radio" name="selected_score" value="${s.id}"></td>
                         <td>${s.id}</td>
                         <td>${s.user_id}</td>
-                        <td><strong>${s.username}</strong></td>
+                        <td>${s.username}</td>
                         <td>${s.game_title}</td>
-                        <td><strong style="color: #1a36d8;">${s.score}</strong></td>
-                        <td>${date}</td>
+                        <td>${s.level || '-'}</td>
+                        <td>${s.score}</td>
+                        <td>${s.duration || '-'}</td>
+                        <td>${s.rank ? '#' + s.rank : '-'}</td>
+                        <td>${s.achieved_at ? new Date(s.achieved_at).toLocaleDateString('en-EN') : '-'}</td>
                     </tr>`;
-            }).join('') : `<tr><td colspan="7" style="text-align:center;">There are no scores.</td></tr>`;
+            }).join('') : `<tr><td colspan="7" style="text-align:center;">There are no scores!</td></tr>`;
         } catch (e) { console.error("Error loading scores:", e); }
     }
 
@@ -282,27 +285,6 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
-    // --- Score Modal Opening ---
-    document.getElementById("modifyScoreBtn")?.addEventListener("click", () => {
-        const selected = document.querySelector('input[name="selected_score"]:checked');
-        if (selected) {
-            const row = selected.closest('tr');
-            document.getElementById("scoreId").value = selected.value.trim();
-            document.getElementById("scoreUserId").value = row.cells[2].innerText.trim();
-            document.getElementById("scoreUsername").value = row.cells[3].innerText.trim();
-            document.getElementById("scoreGameTitle").value = row.cells[4].innerText.trim();
-            document.getElementById("scoreValue").value = row.cells[5].innerText.trim();
-            
-            const scoreModal = document.getElementById("scoreModal");
-            if(scoreModal) {
-                document.getElementById("scoreModalTitle").innerText = "Modify Score (ID: " + selected.value.trim() + ")";
-                scoreModal.style.display = "flex";
-            }
-        } else {
-            showToast("Please select a score from the table!", "warning");
-        }
-    });
-
     // --- Score Save ---
     document.getElementById("scoreForm")?.addEventListener("submit", async (e) => {
         e.preventDefault();
@@ -314,7 +296,10 @@ document.addEventListener("DOMContentLoaded", () => {
             user_id: document.getElementById("scoreUserId").value.trim(),
             username: document.getElementById("scoreUsername").value.trim(),
             game_title: document.getElementById("scoreGameTitle").value.trim(),
-            score: Number(document.getElementById("scoreValue").value)
+            score: Number(document.getElementById("scoreValue").value),
+            level: Number(document.getElementById("scoreLevel").value),
+            duration: Number(document.getElementById("scoreDuration").value),
+            rank: Number(document.getElementById("scoreRank").value)
         };
 
         try {

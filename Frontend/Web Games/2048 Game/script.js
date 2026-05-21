@@ -4,7 +4,6 @@ let rows = 4;
 let columns = 4;
 let timer;
 let seconds = 0;
-
 let touchStartX = 0;
 let touchStartY = 0;
 
@@ -42,6 +41,53 @@ function updateTile(tile, num) {
     }
 }
 
+// --- Check game end ---
+function isGameOver() {
+    if (!board || board.length === 0) return false;
+
+    for (let r = 0; r < rows; r++) {
+        if (!board[r]) continue; 
+
+        for (let c = 0; c < columns; c++) {
+            if (board[r][c] == 0) return false;
+            if (c < columns - 1 && board[r][c] == board[r][c + 1]) return false;
+            if (r < rows - 1 && board[r + 1] && board[r][c] == board[r + 1][c]) return false;
+        }
+    }
+    return true;
+}
+
+if (isGameOver()) {
+    clearInterval(timer);
+    const timePlayed = document.getElementById("time-num").innerText;
+    saveGameResult("2048 Game", score, "Standard", timePlayed);
+    alert("Game Over! Result saved.");
+}
+
+// --- Server backup ---
+async function saveGameResult(gameTitle, score, level, duration) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) return;
+
+    const data = {
+        user_id: user.id,
+        username: user.username,
+        game_title: gameTitle,
+        score: score,
+        level: level,
+        duration: duration,
+        rank: rank
+    };
+
+    try {
+        await fetch('/api/scores', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+    } catch (err) { console.error("Error while saving:", err); }
+}
+
 document.addEventListener("keyup", (e) => {
     if (["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown"].includes(e.key)) {
         handleMove(e.key);
@@ -73,9 +119,32 @@ function handleMove(direction) {
     else if (direction == "ArrowRight") slideRight();
     else if (direction == "ArrowUp") slideUp();
     else if (direction == "ArrowDown") slideDown();
+
     if (originalBoard !== JSON.stringify(board)) {
         setTwo();
-        document.getElementById("score-num").innerText = score;
+    }
+}
+
+function setTwo() {
+    let empty = [];
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < columns; c++) { 
+            if (board[r][c] == 0) empty.push({r, c}); 
+        }
+    }
+    
+    if (empty.length > 0) {
+        let spot = empty[Math.floor(Math.random() * empty.length)];
+        board[spot.r][spot.c] = 2;
+        updateTile(document.getElementById(spot.r + "-" + spot.c), 2);
+    } 
+    
+    if (isGameOver()) {
+        clearInterval(timer);
+        const timePlayed = document.getElementById("time-num").innerText;
+        
+        saveGameResult("2048 Game", score, "Standard", timePlayed);
+        alert("Game Over! Result saved.");
     }
 }
 
@@ -137,20 +206,6 @@ function slideDown() {
     }
 }
 
-function setTwo() {
-    let empty = [];
-    for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < columns; c++) {
-            if (board[r][c] == 0) empty.push({r, c});
-        }
-    }
-    if (empty.length > 0) {
-        let spot = empty[Math.floor(Math.random() * empty.length)];
-        board[spot.r][spot.c] = 2;
-        updateTile(document.getElementById(spot.r + "-" + spot.c), 2);
-    }
-}
-
 function startTimer() {
     clearInterval(timer);
     seconds = 0;
@@ -164,6 +219,10 @@ function startTimer() {
 }
 
 document.getElementById("reset-btn").addEventListener("click", () => {
+    if (score > 0) {
+        saveGameResult("2048 Game", score, "Standard", document.getElementById("time-num").innerText);
+    }
+    
     score = 0;
     document.getElementById("score-num").innerText = 0;
     setGame();

@@ -19,10 +19,36 @@ const updateFoodPosition = () => {
     foodY = Math.floor(Math.random() * 30) + 1;
 }
 
+// --- Server backup ---
+async function saveGameResult(gameTitle, score) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) return;
+    const data = {
+        user_id: user.id,
+        username: user.username,
+        game_title: gameTitle,
+        score: score,
+        level: "Classic",
+        duration: "00:00",
+        rank: 0
+    };
+
+    try {
+        await fetch('/api/scores', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        console.log("Snake result saved!");
+    } catch (err) { console.error("Error while saving result:", err); }
+}
+
 // Game Over Panel
 const handleGameOver = () => {
     clearInterval(setIntervalId);
     
+    saveGameResult("Snake Game", score);
+
     Swal.fire({
         title: 'Game Over!',
         text: `Your Score: ${score}`,
@@ -36,11 +62,7 @@ const handleGameOver = () => {
         cancelButtonColor: '#ff4757',
         allowOutsideClick: false
     }).then((result) => {
-        if (result.isConfirmed) {
-            location.reload();
-        } else {
-            location.reload();
-        }
+        location.reload();
     });
 }
 

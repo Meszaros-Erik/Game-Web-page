@@ -1,28 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
     
-    // --- Toast Notifications ---
-    function showToast(message, type = 'success') {
-        const toastContainer = document.getElementById('toast-container');
-        if (!toastContainer) return;
-        
-        const toast = document.createElement('div');
-        toast.classList.add('toast');
-        if (type === 'error') toast.classList.add('toast-error');
-        if (type === 'warning') toast.classList.add('toast-warning');
-
-        let icon = "<i class='bx bxs-check-circle'></i>";
-        if (type === 'error') icon = "<i class='bx bxs-error-circle'></i>";
-        if (type === 'warning') icon = "<i class='bx bxs-attention'></i>";
-
-        toast.innerHTML = `${icon} <span>${message}</span>`;
-        toastContainer.appendChild(toast);
-
-        setTimeout(() => {
-            toast.classList.add('hide');
-            toast.addEventListener('animationend', () => toast.remove());
-        }, 3000);
-    }
-
     // --- UI Toggle Logic ---
     const container = document.getElementById('container');
     const registerBtn = document.getElementById('register');
@@ -111,9 +88,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
                     setTimeout(() => {
                         if (data.user.role === 1) {
-                            window.location.href = '../Admin Dashbord/index.html';
+                            window.location.href = '/Admin Dashbord/index.html';
                         } else {
-                            window.location.href = '../index.html';
+                            window.location.href = '/User Dashbord/index.html';
                         }
                     }, 1000);
                 } else {

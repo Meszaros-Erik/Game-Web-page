@@ -15,6 +15,37 @@ const colors = ['#FF595E', '#FFCA3A', '#8AC926', '#1982C4', '#6A4C93'];
 let rowCount, columnCount = 10, brickWidth = 66, brickHeight = 22, brickPadding = 10, topOffset = 60, leftOffset = 25;
 let bricks = [];
 
+// --- Server backup ---
+async function saveGameResult(gameTitle, score, level, duration) {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (!user) return;
+    const data = {
+        user_id: user.id,
+        username: user.username,
+        game_title: gameTitle,
+        score: score,
+        level: "Level " + level,
+        duration: duration,
+        rank: 0
+    };
+
+    try {
+        await fetch('/api/scores', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        });
+        console.log("Score saved!");
+    } catch (err) { console.error("Error while saving score:", err); }
+}
+
+function getFormattedTime() {
+    let totalSeconds = Math.floor((Date.now() - startTime) / 1000);
+    let mins = Math.floor(totalSeconds / 60);
+    let secs = totalSeconds % 60;
+    return (mins < 10 ? "0" : "") + mins + ":" + (secs < 10 ? "0" : "") + secs;
+}
+
 function applyLevelSettings() {
     rowCount = 2 + level;
     dx = 3 + level;
