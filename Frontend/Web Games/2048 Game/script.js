@@ -59,13 +59,17 @@ function isGameOver() {
 
 if (isGameOver()) {
     clearInterval(timer);
-    const timePlayed = document.getElementById("time-num").innerText;
-    saveGameResult("2048 Game", score, "Standard", timePlayed);
+    const timeElement = document.getElementById("time-num");
+    const timePlayed = (timeElement && timeElement.innerText) ? timeElement.innerText : "0:00"; 
+    
+    console.log("Time to save:", timePlayed);
+    
+    saveGameResult("2048 Game", score, '-', timePlayed, 0);
     alert("Game Over! Result saved.");
 }
 
 // --- Server backup ---
-async function saveGameResult(gameTitle, score, level, duration) {
+async function saveGameResult(gameTitle, score = 0, level = '-', duration = '0:00') {
     const user = JSON.parse(localStorage.getItem('user'));
     if (!user) return;
 
@@ -75,17 +79,23 @@ async function saveGameResult(gameTitle, score, level, duration) {
         game_title: gameTitle,
         score: score,
         level: level,
-        duration: duration,
-        rank: rank
+        duration: duration
     };
-
     try {
         await fetch('/api/scores', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
-    } catch (err) { console.error("Error while saving:", err); }
+        
+        if (response.ok) {
+            console.log("Successful rescue!");
+        } else {
+            console.error("Server error:", await response.text());
+        }
+    } catch (err) { 
+        console.error("Error saving game result:", err); 
+    }
 }
 
 document.addEventListener("keyup", (e) => {
@@ -119,6 +129,8 @@ function handleMove(direction) {
     else if (direction == "ArrowRight") slideRight();
     else if (direction == "ArrowUp") slideUp();
     else if (direction == "ArrowDown") slideDown();
+
+    document.getElementById("score-num").innerText = score;
 
     if (originalBoard !== JSON.stringify(board)) {
         setTwo();
@@ -158,7 +170,7 @@ function slide(row) {
         if (row[i] == row[i + 1]) {
             row[i] *= 2;
             row[i + 1] = 0;
-            score += row[i];
+            score += row[i]; 
         }
     }
     row = filterZero(row);

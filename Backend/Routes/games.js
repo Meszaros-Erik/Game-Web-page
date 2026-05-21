@@ -16,9 +16,7 @@ router.get('/', async (req, res) => {
 // Add a new game (POST)
 router.post('/', async (req, res) => {
     const { title, category, min_players, developer, status, image_link, game_link, description } = req.body;
-    
     const sql = `INSERT INTO games (title, category, min_players, developer, status, image_link, game_link, description) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
-    
     try {
         await pool.query(sql, [title, category, min_players, developer, status, image_link, game_link, description]);
         res.status(201).json({ success: true, message: "Game added successfully!" });
@@ -32,7 +30,6 @@ router.post('/', async (req, res) => {
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
     const { title, category, min_players, developer, status, image_link, game_link, description } = req.body;
-    
     try {
         const sql = `UPDATE games SET title = ?, category = ?, min_players = ?, developer = ?, status = ?, image_link = ?, game_link = ?, description = ? WHERE id = ?`;
         

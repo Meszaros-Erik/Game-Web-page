@@ -67,7 +67,6 @@ document.addEventListener("DOMContentLoaded", () => {
                         <td>${s.level || '-'}</td>
                         <td>${s.score}</td>
                         <td>${s.duration || '-'}</td>
-                        <td>${s.rank ? '#' + s.rank : '-'}</td>
                         <td>${s.achieved_at ? new Date(s.achieved_at).toLocaleDateString('en-EN') : '-'}</td>
                     </tr>`;
             }).join('') : `<tr><td colspan="7" style="text-align:center;">There are no scores!</td></tr>`;
@@ -214,17 +213,17 @@ document.addEventListener("DOMContentLoaded", () => {
             document.getElementById("gameId").value = selected.value.trim();
             document.getElementById("gameModalTitle").innerText = "Modify Game (ID: " + selected.value.trim() + ")";
             
-            // Biztonságos értékadás függvény
+            // Safe value assignment helper
             const setVal = (id, val) => {
                 const el = document.getElementById(id);
                 if (el) {
                     el.value = val;
                 } else {
-                    console.error("HIBA: Nem találom a mezőt ezzel az ID-val: " + id);
+                    console.error("ERROR: Cannot find the field with this ID: " + id);
                 }
             };
 
-            // Itt használd az index.html-edben lévő pontos ID-kat!
+            // Use the exact IDs from your index.html here!
             setVal("title", row.cells[2].innerText.trim());
             setVal("category", row.cells[3].innerText.trim());
             setVal("min_players", row.cells[4].innerText.trim());

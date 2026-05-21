@@ -85,7 +85,7 @@ body {
   justify-content: center;
   font-weight: bold;
   font-size: 2rem;
-  color: var(--white); /* A számok fehérek lesznek az élénk színeken */
+  color: var(--white);
   transition: transform 0.1s ease;
 }
 
@@ -104,8 +104,8 @@ body {
 
 #reset-btn:hover { background-color: var(--red); }
 
-/* Visszaállított élénk színek az osztályokhoz: */
-.x2 { background-color: var(--yellow); color: #333; } /* A sárgán sötét a szám, hogy látszódjon */
+/* Restored bright tile colors for the classes: */
+.x2 { background-color: var(--yellow); color: #333; } /* Dark text on yellow so the number stays readable */
 .x4 { background-color: var(--orange); }
 .x8 { background-color: var(--red); }
 .x16 { background-color: var(--spring-green); color: #333; }

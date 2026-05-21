@@ -42,20 +42,20 @@ function checkResult() {
     }
 
     if (roundWon) {
-        statusDisplay.innerText = `Győztes: ${currentPlayer}!`;
+        statusDisplay.innerText = `Winner: ${currentPlayer}!`;
         highlightWinners(winningLine);
         gameActive = false;
         return;
     }
 
     if (!gameState.includes("")) {
-        statusDisplay.innerText = "Döntetlen!";
+        statusDisplay.innerText = "Draw!";
         gameActive = false;
         return;
     }
 
     currentPlayer = currentPlayer === "X" ? "O" : "X";
-    statusDisplay.innerText = `„${currentPlayer}” játékos jön`;
+    statusDisplay.innerText = `${currentPlayer} player's turn`;
 }
 
 function highlightWinners(indices) {
@@ -68,7 +68,7 @@ function restartGame() {
     currentPlayer = "X";
     gameState = ["", "", "", "", "", "", "", "", ""];
     gameActive = true;
-    statusDisplay.innerText = "„X” játékos jön";
+    statusDisplay.innerText = "X player's turn";
     cells.forEach(cell => {
         cell.innerText = "";
         cell.classList.remove('x', 'o', 'winner');

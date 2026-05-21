@@ -10,6 +10,7 @@
 - **Ping-Pong Game :** - A fast-paced test of reflexes inspired by the classic arcade era.
 - **Chess Game :** - The ultimate board game of logic, foresight, and tactical mastery.
 - **Modern Tetris Game :** - A sleek, updated version of the world's most famous block-stacking puzzle.
+- **Breakout Game :** - Breakout is a classic arcade game where the player controls a paddle to bounce a ball and destroy all the bricks on the screen.
 
 ---
 ## Technical Overview

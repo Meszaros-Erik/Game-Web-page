@@ -20,7 +20,7 @@ const updateFoodPosition = () => {
 }
 
 // --- Server backup ---
-async function saveGameResult(gameTitle, score) {
+async function saveGameResult(gameTitle, score, level) {
     const user = JSON.parse(localStorage.getItem('user'));
     if (!user) return;
     const data = {
@@ -28,9 +28,7 @@ async function saveGameResult(gameTitle, score) {
         username: user.username,
         game_title: gameTitle,
         score: score,
-        level: "Classic",
-        duration: "00:00",
-        rank: 0
+        level: level
     };
 
     try {
@@ -47,7 +45,7 @@ async function saveGameResult(gameTitle, score) {
 const handleGameOver = () => {
     clearInterval(setIntervalId);
     
-    saveGameResult("Snake Game", score);
+    saveGameResult("Snake Game", score, "Classic");
 
     Swal.fire({
         title: 'Game Over!',

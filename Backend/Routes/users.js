@@ -47,7 +47,7 @@ router.put('/profile/:id', async (req, res) => {
         params.push(id);
 
         await pool.query(updateQuery, params);
-        res.status(200).json({ success: true, message: "Profile updated!" });
+        res.status(200).json({ success: true, message: "Profile updated !" });
     } catch (error) {
         res.status(500).json({ success: false, message: "Server error" });
     }

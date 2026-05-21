@@ -1,0 +1,18 @@
+    user: 'root',
+    password: 'ELSOkezdes0519',
+----------------------------------------------------------------------------------------------------------------------------------------------------
+Mr.Erik - erik@gmail.com - ELSOkezdes0519 - Admin
+Anna - anna@gmail.com - TESTero25 - User
+Test1 - test@gmail.com - TESTero50 - User
+-----------------------------------------------------------------------------------------------------------------------------------------------------
+Title		Category	Min Players	Developer	Game Link				Description	
+Rol Dice		Utility	1		G-Web Studios	\Web Games\Roll Dice App\index.html		Roll the virtual dice to quickly and easily generate random numbers for your games.
+Lottery Spin Wheel	Casual	1		G-Web Studios	\Web Games\Lottery Spin Wheel\index.html	Spin the digital wheel of fortune and leave prize drawing or decision-making up to chance.
+Simple X/O	Board	2		G-Web Studios	\Web Games\Simple X-O\index.html		The classic Tic-Tac-Toe game where you need to align three identical marks in a row, column, or diagonal.	
+Ping Pong		Arcade	1		G-Web Studios	\Web Games\Ping-Pong Game\index.html	Hit the bouncing ball back with your paddle and defeat your opponent in this fast-paced, retro-style game.	
+Chess Game	Strategy	1		G-Web Studios	\Web Games\Chess Game\index.html		Test your logic and strategic skills in one of the world's most popular classic board games.
+Mine Sweeper	Puzzle	1		G-Web Studios	\Web Games\Mine Sweeper\index.html		Uncover the grid using numbers as clues and find all the hidden mines without blowing up.
+Snake Game	Arcade	1		G-Web Studios	\Web Games\Snake Game\index.html		Guide the ever-growing snake and eat as many points as possible without crashing into the walls or yourself.	
+2048 Game	Puzzle	1		G-Web Studios	\Web Games\2048 Game\index.html		Slide and combine matching numbers on the board to eventually reach the magic tile of 2048.
+Modern Tetris Game	Arcade	1		G-Web Studios	\Web Games\Tetris Clone Game\index.html	Rotate and fit the falling blocks together to build complete lines and clear them from the screen for points.	
+Breakout Game	Arcade	1		G-Web Studios	\Web Games\				Breakout is a classic arcade game where the player controls a paddle to bounce a ball and destroy all the bricks on the screen.

@@ -12,24 +12,25 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const { user_id, username, game_title, score, level, duration, rank } = req.body;
-    const finalRank = rank || 0;
-    await pool.query(sql, [user_id, username, game_title, score, level, duration, finalRank]);
+    console.log("\nIncoming data:", req.body);
+    const { user_id, username, game_title, score, level, duration } = req.body;
+    const finalDuration = (duration && duration !== "undefined" && duration !== "-") ? duration : "0:00";
+    const finalLevel = level || '-';
     try {
-        const sql = `INSERT INTO scores (user_id, username, game_title, score, level, duration, rank) VALUES (?, ?, ?, ?, ?, ?, ?)`;
-        await pool.query(sql, [user_id, username, game_title, score, level, duration, rank]);
+        const sql = `INSERT INTO scores (user_id, username, game_title, score, level, duration) VALUES (?, ?, ?, ?, ?, ?)`;
+        await pool.query(sql, [user_id, username, game_title, score, finalLevel, finalDuration]);
         res.status(201).json({ success: true, message: "Score added successfully!" });
     } catch (error) {
-        res.status(500).json({ success: false, message: "Server error while saving the score." });
+        res.status(500).json({ success: false, message: "Database error" });
     }
 });
 
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
-    const { user_id, username, game_title, score, level, duration, rank } = req.body;
+    const { user_id, username, game_title, score, level, duration } = req.body;
     try {
-        const sql = `UPDATE scores SET user_id = ?, username = ?, game_title = ?, score = ?, level = ?, duration = ?, rank = ? WHERE id = ?`;
-        await pool.query(sql, [user_id, username, game_title, score, level, duration, rank, id]);
+        const sql = `UPDATE scores SET user_id = ?, username = ?, game_title = ?, score = ?, level = ?, duration = ? WHERE id = ?`;
+        await pool.query(sql, [user_id, username, game_title, score, level, duration, id]);
         res.status(200).json({ success: true, message: "Score updated successfully!" });
     } catch (error) {
         res.status(500).json({ success: false, message: "Server error while updating the score." });

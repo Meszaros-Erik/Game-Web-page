@@ -28,7 +28,6 @@ document.addEventListener("DOMContentLoaded", () => {
             }
 
             userScores.forEach(score => {
-                const dateValue = score.date ? new Date(score.date).toLocaleDateString('en-EN') : "N/A";
                 const row = document.createElement('tr');
                 row.innerHTML = `
                     <td><input type="radio" class="score-checkbox" value="${score.id}"></td>
@@ -36,7 +35,6 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${score.level || '-'}</td>
                     <td>${score.score}</td>
                     <td>${score.duration || '-'}</td>
-                    <td>${score.rank ? '#' + score.rank : '-'}</td>
                     <td>${score.achieved_at ? new Date(score.achieved_at).toLocaleDateString('en-EN') : '-'}</td>
                 `;
                 tableBody.appendChild(row);
@@ -46,7 +44,7 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 
-    // Törlés függvény
+    // Delete functionality
     async function deleteSelectedScores() {
         const checkboxes = document.querySelectorAll('.score-checkbox:checked');
         if (checkboxes.length === 0) return alert("Please select at least one!");

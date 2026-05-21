@@ -17,8 +17,7 @@ async function saveGameResult(gameTitle, score, level, duration) {
         game_title: gameTitle,
         score: score,
         level: level,
-        duration: duration,
-        rank: 0
+        duration: duration
     };
 
     try {

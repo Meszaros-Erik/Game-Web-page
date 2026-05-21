@@ -17,26 +17,33 @@ let bricks = [];
 
 // --- Server backup ---
 async function saveGameResult(gameTitle, score, level, duration) {
+    console.log("Starting save...");
     const user = JSON.parse(localStorage.getItem('user'));
-    if (!user) return;
+    if (!user) {
+        console.log("Error: No logged-in user!");
+        return;
+    }
+    
     const data = {
         user_id: user.id,
         username: user.username,
         game_title: gameTitle,
         score: score,
         level: "Level " + level,
-        duration: duration,
-        rank: 0
+        duration: duration
     };
 
+    console.log("Sent data:", data);
+
     try {
-        await fetch('/api/scores', {
+        const response = await fetch('/api/scores', {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(data)
         });
-        console.log("Score saved!");
-    } catch (err) { console.error("Error while saving score:", err); }
+        const result = await response.json();
+        console.log("Server response:", result);
+    } catch (err) { console.error("Error while saving:", err); }
 }
 
 function getFormattedTime() {
@@ -53,7 +60,6 @@ function applyLevelSettings() {
     paddleWidth = 120 - (level * 10);
     paddleX = (canvas.width - paddleWidth) / 2;
     bricksDestroyed = 0;
-
     x = canvas.width / 2;
     y = canvas.height - 50;
 
@@ -83,10 +89,8 @@ canvas.addEventListener("touchmove", (e) => {
 function drawHUD() {
     ctx.fillStyle = "#333";
     ctx.font = "bold 20px Arial";
-    
     ctx.textAlign = "left";
     ctx.fillText("Score: " + score, 25, 35);
-    
     ctx.textAlign = "right";
     ctx.fillText("Level: " + level + " / " + maxLevel, canvas.width - 25, 35);
 }
@@ -112,7 +116,6 @@ function drawBricks() {
 function update() {
     if (!isRunning) return;
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    
     drawHUD();
     drawBricks();
     
@@ -123,22 +126,16 @@ function update() {
         for (let r = 0; r < rowCount; r++) {
             let b = bricks[c][r];
             if (b.status === 1 && x > b.x && x < b.x + brickWidth && y > b.y && y < b.y + brickHeight) {
-                dy = -dy; 
-                b.status = 0; 
-                score += (10 * level);
-                bricksDestroyed++;
-                
+                dy = -dy; b.status = 0; score += (10 * level); bricksDestroyed++;
                 if (bricksDestroyed === rowCount * columnCount) {
                     level++;
                     if (level > maxLevel) {
                         isRunning = false;
+                        saveGameResult("Bounce Ball", score, maxLevel, getFormattedTime());
                         document.getElementById('overlay').style.display = 'flex';
                         document.getElementById('msg-title').innerText = "You Win!";
-                        document.getElementById('msg-score').innerText = "You completed all 5 levels! Score: " + score;
-                        document.getElementById('start-btn').innerText = "Play Again";
-                    } else {
-                        applyLevelSettings();
-                    }
+                        document.getElementById('msg-score').innerText = "Score: " + score;
+                    } else { applyLevelSettings(); }
                 }
             }
         }
@@ -151,20 +148,18 @@ function update() {
             dy = -dy;
         } else if (y + dy > canvas.height - ballRadius) { 
             isRunning = false; 
+            saveGameResult("Bounce Ball", score, level, getFormattedTime());
             document.getElementById('overlay').style.display = 'flex'; 
             document.getElementById('msg-title').innerText = "Game Over!";
-            document.getElementById('msg-score').innerText = "Level Reached: " + level + " | Score: " + score;
-            document.getElementById('start-btn').innerText = "New Game";
+            document.getElementById('msg-score').innerText = "Score: " + score;
         }
     }
-    
     x += dx; y += dy;
     requestAnimationFrame(update);
 }
 
 function startGame() {
-    score = 0;
-    level = 1;
+    score = 0; level = 1; startTime = Date.now();
     applyLevelSettings();
     isRunning = true;
     document.getElementById('overlay').style.display = 'none';

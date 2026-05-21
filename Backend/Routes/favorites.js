@@ -30,9 +30,9 @@ router.get('/:userId', async (req, res) => {
     try {
         const [rows] = await pool.query(
             `SELECT f.id AS favorite_id, g.id AS game_id, g.title, g.image_link, g.game_link 
-             FROM Favorites f 
-             JOIN Games g ON f.game_id = g.id 
-             WHERE f.user_id = ?`, 
+            FROM Favorites f 
+            JOIN Games g ON f.game_id = g.id 
+            WHERE f.user_id = ?`, 
             [userId]
         );
         res.status(200).json(rows);

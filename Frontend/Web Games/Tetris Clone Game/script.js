@@ -43,9 +43,7 @@ async function saveGameResult(gameTitle, score, level) {
         username: user.username,
         game_title: gameTitle,
         score: score,
-        level: "Level " + level,
-        duration: "00:00",
-        rank: 0
+        level: level
     };
 
     try {
