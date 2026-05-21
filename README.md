@@ -37,7 +37,3 @@ The website is powered by a robust **Node.js** environment, transforming it from
 - **Nodemailer :** Integrated into the backend to handle automated email notifications via **Gmail SMTP** using secure **App Passwords**.
 - **SweetAlert2 :** For beautiful, responsive, and customizable popup notifications that react to the server's response.
 - **Boxicons :** Used for a modern, unified icon set across the UI and Dark Mode toggles.
-
----
-## How to Play
-Whether you're looking for a quick distraction or exploring simple game logic, these gems are polished and ready to play directly in your browser. No downloads or installations required-just click and play!

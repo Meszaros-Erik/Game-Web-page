@@ -228,8 +228,9 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "3b7588c59cc2ce5e",
+  "active": "041d2aee37a23334",
   "lastOpenFiles": [
+    "README.md",
     "Backend/node_modules/nodemailer/lib/shared/index.js",
     "Backend/node_modules/nodemailer/lib/shared",
     "Backend/node_modules/nodemailer/lib/ses-transport/index.js",
@@ -240,9 +241,7 @@
     "Backend/node_modules/nodemailer/lib/qp",
     "Backend/node_modules/nodemailer/lib/punycode/index.js",
     "Backend/node_modules/nodemailer/lib/punycode",
-    "Backend/node_modules/nodemailer/SECURITY.txt",
     "Backend/node_modules/nodemailer/README.md",
-    "README.md",
     "Backend/node_modules/wrappy/README.md",
     "Backend/node_modules/unpipe/README.md",
     "Backend/node_modules/unpipe/HISTORY.md",
