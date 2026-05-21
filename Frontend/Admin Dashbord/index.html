@@ -85,9 +85,11 @@
                             <th>Min Players</th>
                             <th>Status</th>
                             <th>Clicks</th>
+                            <th>Developer</th>
                             <th>Image Link</th>
                             <th>Game Link</th>
                             <th>Description</th>
+                            <th>Created At</th>
                         </tr>
                     </thead>
                     <tbody id="gamesTableBody"></tbody>
@@ -177,46 +179,58 @@
                     <span class="close-btn" id="closeGameModal">&times;</span>
                 </div>
                 <form id="gameForm">
-                    <input type="hidden" id="gameId">
-                    <div class="input-group">
-                        <label>Game Title:</label>
-                        <input type="text" id="gameTitle" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Category:</label>
-                        <input type="text" id="gameCategory" placeholder="e.g. Arcade, Puzzle" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Min Players:</label>
-                        <input type="number" id="gameMinPlayers" min="1" value="1" required>
-                    </div>
-                    <div class="input-group">
-                        <label>Status:</label>
-                        <select id="gameIsActive">
-                            <option value="1">Active</option>
-                            <option value="0">Inactive</option>
-                        </select>
-                    </div>
-                    <div class="input-group" style="display: flex; gap: 10px; align-items: center;">
-                        <label>Image Path:</label>
-                        <input type="text" id="gameImageUrl" placeholder="game.png">
-                        
-                        <button type="button" onclick="document.getElementById('imageFileInput').click()" title="Image Browsing" style="cursor: pointer; padding: 5px 10px;">
-                            <i class="bx bx-folder-plus"></i>
-                        </button>
-                        <input type="file" id="imageFileInput" style="display: none;" accept="image/*">
+                    <input type="hidden" id="gameId" value="">
+
+                    <div class="input-box">
+                        <div class="input-field field">
+                            <input type="text" id="title" class="item" placeholder="Game Title" required>
+                            <div class="error-text">Title is required!</div>
+                        </div>
+                        <div class="input-field field">
+                            <input type="text" id="category" class="item" placeholder="Category" required>
+                            <div class="error-text">Category is required!</div>
+                        </div>
                     </div>
 
-                    <div class="input-group">
-                        <label>Game Link:</label>
-                        <input type="text" id="gameLink" placeholder="Pl.: Web Games/Game Name/index.html">
+                    <div class="input-box">
+                        <div class="input-field field">
+                            <input type="number" id="min_players" class="item" placeholder="Min Players" required>
+                            <div class="error-text">Min players required!</div>
+                        </div>
+                        <div class="input-field field">
+                            <input type="text" id="developer" class="item" placeholder="Developer" required>
+                            <div class="error-text">Developer is required!</div>
+                        </div>
                     </div>
-                    <div class="input-group">
-                        <label>Description:</label>
-                        <textarea id="gameDescription" rows="3" style="resize: none;"></textarea>
+
+                    <div class="input-box">
+                        <div class="input-field field">
+                            <select id="status" class="item" required>
+                                <option value="Active">Active</option>
+                                <option value="Inactive">Inactive</option>
+                            </select>
+                        </div>
+                        <div class="input-field field" style="display: flex; align-items: center; gap: 10px;">
+                            <input type="text" id="image_link" class="item" placeholder="Image Link" required>
+                            <i class='bx bx-folder-open' id="filePickerIcon" style="cursor: pointer; font-size: 2.5rem; color: var(--main-color);" title="Select Image"></i>
+                            <input type="file" id="imageFileInput" style="display: none;" accept="image/*">
+                        </div>
                     </div>
+
+                    <div class="input-box">
+                        <div class="input-field field" style="width: 100%;">
+                            <input type="text" id="game_link" class="item" placeholder="Game Link" required>
+                        </div>
+                    </div>
+
+                    <div class="textarea-field field">
+                        <textarea id="description" cols="30" rows="5" class="item" placeholder="Game Description..." required></textarea>
+                        <div class="error-text">Description is required!</div>
+                    </div>
+
                     <button type="submit" class="btn btn-save">Save Game</button>
                 </form>
+
             </div>
         </div>
 
@@ -229,24 +243,22 @@
                 <form id="scoreForm">
                     <input type="hidden" id="scoreId">
                     
-                    <div class="input-group">
-                        <label>User ID:</label>
-                        <input type="number" id="scoreUserId" required>
+                    <div class="input-box">
+                        <div class="input-field field">
+                            <input type="number" id="scoreUserId" class="item" placeholder="User ID" readonly>
+                        </div>
+                        <div class="input-field field">
+                            <input type="text" id="scoreUsername" class="item" placeholder="Username" readonly>
+                        </div>
                     </div>
-                    
-                    <div class="input-group">
-                        <label>Username:</label>
-                        <input type="text" id="scoreUsername" required>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label>Game Title:</label>
-                        <input type="text" id="scoreGameTitle" required>
-                    </div>
-                    
-                    <div class="input-group">
-                        <label>Score:</label>
-                        <input type="number" id="scoreValue" required>
+
+                    <div class="input-box">
+                        <div class="input-field field">
+                            <input type="text" id="scoreGameTitle" class="item" placeholder="Game Title" required>
+                        </div>
+                        <div class="input-field field">
+                            <input type="number" id="scoreValue" class="item" placeholder="Score" required>
+                        </div>
                     </div>
                     
                     <button type="submit" class="btn btn-save">Save Score</button>

@@ -39,11 +39,13 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${g.min_players}</td>
                     <td>${g.status}</td>
                     <td>${g.clicks}</td>
+                    <td>${g.developer || '-'}</td>
                     <td>${g.image_link || '-'}</td>
                     <td>${g.game_link || '-'}</td>
                     <td>${g.description || '-'}</td>
+                    <td>${new Date(g.created_at).toLocaleDateString('en-EN')}</td>
                 </tr>
-            `).join('') : `<tr><td colspan="10" style="text-align:center;">There are no games registered.</td></tr>`;
+            `).join('') : `<tr><td colspan="12" style="text-align:center;">There are no games registered.</td></tr>`;
         } catch (e) { console.error("Error loading games:", e); }
     }
 
@@ -54,7 +56,7 @@ document.addEventListener("DOMContentLoaded", () => {
             const res = await fetch('/api/scores');
             const scores = await res.json();
             tbody.innerHTML = scores.length ? scores.map(s => {
-                const date = new Date(s.achieved_at).toLocaleDateString('hu-HU');
+                const date = new Date(s.achieved_at).toLocaleDateString('en-EN');
                 return `
                     <tr>
                         <td><input type="radio" name="selected_score" value="${s.id}"></td>
@@ -84,7 +86,7 @@ document.addEventListener("DOMContentLoaded", () => {
                     <td>${m.phone || '-'}</td>
                     <td>${m.subject || '-'}</td>
                     <td>${m.message}</td>
-                    <td>${new Date(m.created_at).toLocaleDateString('hu-HU')}</td>
+                    <td>${new Date(m.created_at).toLocaleDateString('en-EN')}</td>
                 </tr>
             `).join('') : `<tr><td colspan="8" style="text-align:center;">There are no messages.</td></tr>`;
         } catch (e) { console.error("Error loading contact messages:", e); }
@@ -203,26 +205,34 @@ document.addEventListener("DOMContentLoaded", () => {
     });
 
     document.getElementById("modifyGameBtn")?.addEventListener("click", () => {
-        const selected = document.querySelector('input[name="selected_game"]:checked');
+    const selected = document.querySelector('input[name="selected_game"]:checked');
         if (selected) {
             const row = selected.closest('tr');
             document.getElementById("gameId").value = selected.value.trim();
             document.getElementById("gameModalTitle").innerText = "Modify Game (ID: " + selected.value.trim() + ")";
-            document.getElementById("gameTitle").value = row.cells[2].innerText.trim();
-            document.getElementById("gameCategory").value = row.cells[3].innerText.trim();
-            document.getElementById("gameMinPlayers").value = row.cells[4].innerText.trim();
+            
+            // Biztonságos értékadás függvény
+            const setVal = (id, val) => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.value = val;
+                } else {
+                    console.error("HIBA: Nem találom a mezőt ezzel az ID-val: " + id);
+                }
+            };
+
+            // Itt használd az index.html-edben lévő pontos ID-kat!
+            setVal("title", row.cells[2].innerText.trim());
+            setVal("category", row.cells[3].innerText.trim());
+            setVal("min_players", row.cells[4].innerText.trim());
             
             const statusText = row.cells[5].innerText.trim();
-            document.getElementById("gameIsActive").value = statusText === "Active" ? "1" : "0";
+            setVal("status", statusText === "Active" ? "Active" : "Inactive");
             
-            const imageUrl = row.cells[7].innerText.trim();
-            document.getElementById("gameImageUrl").value = imageUrl !== "-" ? imageUrl : "";
-            
-            const gameLink = row.cells[8].innerText.trim();
-            document.getElementById("gameLink").value = gameLink !== "-" ? gameLink : "";
-            
-            const description = row.cells[9].innerText.trim();
-            document.getElementById("gameDescription").value = description !== "-" ? description : "";
+            setVal("developer", row.cells[6].innerText.trim() === "-" ? "" : row.cells[6].innerText.trim());
+            setVal("image_link", row.cells[8].innerText.trim() === "-" ? "" : row.cells[8].innerText.trim());
+            setVal("game_link", row.cells[9].innerText.trim() === "-" ? "" : row.cells[9].innerText.trim());
+            setVal("description", row.cells[10].innerText.trim() === "-" ? "" : row.cells[10].innerText.trim());
             
             gameModal.style.display = "flex"; 
         } else {
@@ -239,13 +249,15 @@ document.addEventListener("DOMContentLoaded", () => {
         const url = gameId ? `/api/games/${gameId}` : '/api/games';
 
         const gameData = {
-            title: document.getElementById("gameTitle").value.trim(),
-            category: document.getElementById("gameCategory").value.trim(),
-            min_players: Number(document.getElementById("gameMinPlayers").value),
-            status: document.getElementById("gameIsActive").value === "1" ? "Active" : "Inactive",
-            image_link: document.getElementById("gameImageUrl").value.trim(),
-            game_link: document.getElementById("gameLink").value.trim(),
-            description: document.getElementById("gameDescription").value.trim()
+            // Az eredeti ID-kat olvassuk ki:
+            title: document.getElementById("title").value.trim(),
+            category: document.getElementById("category").value.trim(),
+            min_players: Number(document.getElementById("min_players").value),
+            developer: document.getElementById("developer").value.trim(),
+            status: document.getElementById("status").value,
+            image_link: document.getElementById("image_link").value.trim(),
+            game_link: document.getElementById("game_link").value.trim(),
+            description: document.getElementById("description").value.trim()
         };
 
         try {
@@ -261,12 +273,11 @@ document.addEventListener("DOMContentLoaded", () => {
                 loadGames();
             } else {
                 const errorData = await res.json().catch(() => ({}));
-                console.error("Backend visszajelzés:", errorData);
-                const errorMessage = errorData.message || errorData.error || "Error saving game!";
+                const errorMessage = errorData.message || "Error saving game!";
                 showToast(errorMessage, "error");
             }
         } catch (e) { 
-            console.error("Hálózati hiba:", e); 
+            console.error("Network error:", e); 
             showToast("Network error occurred!", "error");
         }
     });
@@ -323,7 +334,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 showToast(errorData.message || "Error updating score.", "error");
             }
         } catch (e) { 
-            console.error("Hálózati hiba:", e); 
+            console.error("Network error:", e); 
             showToast("Network error occurred!", "error");
         }
     });
@@ -335,9 +346,13 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 });
 
-// File Browser
+// File Browser logika
+document.getElementById('filePickerIcon')?.addEventListener('click', () => {
+    document.getElementById('imageFileInput').click();
+});
+
 document.getElementById('imageFileInput')?.addEventListener('change', function(event) {
     if (event.target.files.length > 0) {
-        document.getElementById('gameImageUrl').value = 'image/' + event.target.files[0].name;
+        document.getElementById('image_link').value = 'image/' + event.target.files[0].name;
     }
 });
