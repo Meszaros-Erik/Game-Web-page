@@ -8,16 +8,28 @@ router.get('/', async (req, res) => {
         const [rows] = await pool.query('SELECT id, username, email, role FROM users');
         res.status(200).json(rows);
     } catch (error) {
+        console.error("❌ Retrieve error:", error);
         res.status(500).json({ success: false, message: "Error retrieving users." });
     }
 });
 
-router.put('/:id', async (req, res) => {
+router.delete('/:id', async (req, res) => {
+    try {
+        await pool.query('DELETE FROM users WHERE id = ?', [req.params.id]);
+        res.status(200).json({ success: true, message: "User deleted successfully!" });
+    } catch (error) {
+        console.error("❌ Delete error:", error);
+        res.status(500).json({ success: false, message: "Error deleting user." });
+    }
+});
+
+router.put('/:id/role', async (req, res) => {
     const { role } = req.body;
     try {
         await pool.query('UPDATE users SET role = ? WHERE id = ?', [role, req.params.id]);
         res.status(200).json({ success: true, message: "Role updated successfully!" });
     } catch (error) {
+        console.error("❌ Role update error:", error);
         res.status(500).json({ success: false, message: "Error updating role." });
     }
 });
@@ -49,7 +61,8 @@ router.put('/profile/:id', async (req, res) => {
         await pool.query(updateQuery, params);
         res.status(200).json({ success: true, message: "Profile updated !" });
     } catch (error) {
-        res.status(500).json({ success: false, message: "Server error" });
+        console.error("❌ Profile update error:", error);
+        res.status(500).json({ success: false, message: "Server error." });
     }
 });
 
