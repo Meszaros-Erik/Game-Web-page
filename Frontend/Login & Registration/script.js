@@ -69,7 +69,6 @@ document.addEventListener("DOMContentLoaded", () => {
             
             const email = document.getElementById('login-email').value;
             const password = document.getElementById('login-password').value;
-            
             try {
                 const response = await fetch('/api/auth/login', {
                     method: 'POST',
@@ -78,14 +77,10 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
 
                 const data = await response.json();
-                
                 if (data.success) {
                     localStorage.setItem("user", JSON.stringify(data.user));
-                
                     sessionStorage.removeItem('logout_pressed');
-                    
                     showToast(data.message, 'success');
-
                     setTimeout(() => {
                         if (data.user.role === 1) {
                             window.location.href = '/Admin Dashbord/index.html';

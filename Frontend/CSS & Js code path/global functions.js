@@ -83,6 +83,7 @@ function showToast(message, type = 'success') {
 
     if (type === 'error') toast.classList.add('toast-error');
     if (type === 'warning') toast.classList.add('toast-warning');
+    if (type === 'success') toast.classList.add('toast-success');
 
     let icon = "<i class='bx bxs-check-circle'></i>";
     if (type === 'error') icon = "<i class='bx bxs-error-circle'></i>";
@@ -103,8 +104,11 @@ document.addEventListener("DOMContentLoaded", async () => {
     
     // User Profile & Menu Logic
     const loginBtn = document.getElementById('loginBtn');
+    const logoutBtn = document.getElementById('logoutBtn');
     const userProfile = document.getElementById('userProfile');
     const profileName = document.getElementById('profileName');
+    const dropdownMenu = document.getElementById('dropdownMenu');
+    const profileTrigger = document.getElementById('profileTrigger');
     const profileImg = document.querySelector('#profileTrigger .profile-img');
     const loggedInUser = JSON.parse(localStorage.getItem('user'));
 
@@ -133,7 +137,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         if (userProfile) userProfile.style.display = 'none';
     }
 
-    if (profileTrigger) {
+    if (profileTrigger && dropdownMenu) {
         profileTrigger.addEventListener('click', (e) => {
             e.stopPropagation();
             dropdownMenu.classList.toggle('show');
