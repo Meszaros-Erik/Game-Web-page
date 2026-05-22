@@ -37,3 +37,56 @@ The website is powered by a robust **Node.js** environment, transforming it from
 - **Nodemailer :** Integrated into the backend to handle automated email notifications via **Gmail SMTP** using secure **App Passwords**.
 - **SweetAlert2 :** For beautiful, responsive, and customizable popup notifications that react to the server's response.
 - **Boxicons :** Used for a modern, unified icon set across the UI and Dark Mode toggles.
+
+---
+## Development Environment & Tools
+This project is built using a modern stack designed for local development and testing.
+- **Editor :** [Visual Studio Code](https://code.visualstudio.com/) is used for all development, utilizing extensions for Node.js and Markdown *(for Obsidian compatibility)*.
+- **Local Server & Database:**
+    - **XAMPP :** Utilized to manage the local environment.
+    - **Apache :** Serves as the base layer for local hosting integration.
+    - **MySQL :** Manages the relational database structure.
+    - **phpMyAdmin :** Used for efficient SQL database administration, schema design, and data management.
+- **Backend Runtime :** [Node.js](https://nodejs.org/) powers the server-side logic and API routing.
+
+---
+## Setup Instructions
+Follow these steps to run the project locally on your machine :
+1. **Clone the repository :**
+   ```bash
+   git clone [https://github.com/Meszaros-Erik/G-Web.git (https://github.com/Meszaros-Erik/G-Web.git)
+   ```
+
+2. **Database Setup :** 
+    - Open **XAMPP Control Panel** and start **Apache** and **MySQL**.  
+    - Navigate to `http://localhost:8080/phpmyadmin/`. 
+    - Create a new database and import the SQL structure *(based on the provided diagram in `SQL DataBase.jpg`)*.
+3. **Install Dependencies :**
+    - Open the project folder in VS Code.
+    - Run the following command in the terminal :  
+```bash
+npm install
+```
+
+4. **Environment Configuration :**
+    - Ensure your database connection settings in `config/db.js` match your local XAMPP MySQL configuration (default: user `root`, no password).
+5. **Start the Application :**  
+```bash
+node server.js
+``` 
+
+- The server will be accessible via `http://localhost:3500` or your local network IP as indicated in the console. 
+
+---
+## 📊 System Architecture & UML Diagram 
+The system follows a classic **Client-Server architecture**. Below is the UML representation of the database relationships and the data flow between components. 
+### Database ER Diagram 
+The following diagram illustrates the relational structure of the database, highlighting the connections between `Users`, `Games`, `Scores`, and `Favorites`. 
+![Database Schema](SQL%20DataBase.jpg) 
+### System Data Flow *(Mermaid UML)* 
+You can view the system's logic flow directly within Obsidian using the following Mermaid syntax : ```mermaid graph TD 
+A [Frontend: User/Admin Interface] -- Fetch API / POST / DELETE --> B [Express.js-Backend] 
+B -- Queries --> C [(MySQL Database)] 
+B -- Send Notifications --> D [Gmail SMTP / Nodemailer] 
+C -- Returns Data --> B 
+B -- JSON Response --> A```

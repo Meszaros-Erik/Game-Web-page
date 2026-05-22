@@ -213,7 +213,8 @@
       }
     ],
     "direction": "horizontal",
-    "width": 288.5
+    "width": 288.5,
+    "collapsed": true
   },
   "left-ribbon": {
     "hiddenItems": {
@@ -228,7 +229,7 @@
       "omnisearch:Omnisearch": false
     }
   },
-  "active": "041d2aee37a23334",
+  "active": "3b7588c59cc2ce5e",
   "lastOpenFiles": [
     "README.md",
     "Backend/node_modules/nodemailer/lib/shared/index.js",
