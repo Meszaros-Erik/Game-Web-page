@@ -16,3 +16,4 @@ Snake Game	Arcade	1		G-Web Studios	\Web Games\Snake Game\index.html		Guide the e
 2048 Game	Puzzle	1		G-Web Studios	\Web Games\2048 Game\index.html		Slide and combine matching numbers on the board to eventually reach the magic tile of 2048.
 Modern Tetris Game	Arcade	1		G-Web Studios	\Web Games\Tetris Clone Game\index.html	Rotate and fit the falling blocks together to build complete lines and clear them from the screen for points.	
 Breakout Game	Arcade	1		G-Web Studios	\Web Games\				Breakout is a classic arcade game where the player controls a paddle to bounce a ball and destroy all the bricks on the screen.
+Sodoku Game	Puzzle / Logic 1 		G-Web Studios	\Web Games\Sudoku Game\index.html		Sudoku is a popular logic-based, combinatorial number-placement puzzle that challenges players to fill a 9x9 grid so that each row, column, and 3x3 												subgrid contains all of the digits from 1 to 9 exactly once.
